@@ -1,0 +1,93 @@
+﻿@model ReviewFood.Models.TaiKhoan
+@{
+    ViewData["Title"] = "Details Account";
+    ViewData["TitleHeader"] = "Chi tiết tài khoản " + Model.Id;
+}
+
+<h2>Details</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HoTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </dt>
+
+        <dd>
+            @if (Model.GioiTinh == true)
+            {
+                <p>Nam</p>
+            }
+            else
+            {
+                <p>Nữ</p>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+
+        <dd>
+            @if (Model.TrangThai == true)
+            {
+                <p>Kích hoạt</p>
+            }
+            else
+            {
+                <p>Vô hiệu</p>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quyen)
+        </dt>
+
+        <dd>
+            @if (Model.Quyen == true)
+            {
+                <p>Admin</p>
+            }
+            else
+            {
+                <p>Người dùng</p>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgaySinh)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

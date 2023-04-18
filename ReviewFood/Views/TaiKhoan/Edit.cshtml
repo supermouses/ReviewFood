@@ -1,0 +1,84 @@
+﻿@model ReviewFood.Models.TaiKhoan
+@{
+    ViewBag.Title = "Details";
+}
+<section class="s-content s-content--top-padding s-content--narrow">
+
+    <article class="row entry format-standard">
+
+        <div class="entry__media col-full">
+            <div class="card card-primary content">
+                <div class="row">
+
+                    <!-- START respond -->
+                    <div id="respond" class="col-full">
+                        @using (Html.BeginForm("Edit", "TaiKhoan", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <fieldset>
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.Id)
+                                <div class="form-field">
+                                    @Html.EditorFor(model => model.TenDangNhap, new { htmlAttributes = new { @class = "full-width", @placeholder = "Tên đăng nhập*", @readonly = "true" } })
+                                    @Html.ValidationMessageFor(model => model.TenDangNhap, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-field">
+                                    @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "full-width", @placeholder = "Họ tên*", @required = "true" } })
+                                    @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-field">
+                                    @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "full-width", @placeholder = "Mật khẩu*", @required = "true", @type = "password" } })
+                                    @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                                </div>
+
+                                Nữ:   @Html.RadioButtonFor(model => model.GioiTinh, "false") &emsp;&emsp;
+                                Nam: @Html.RadioButtonFor(model => model.GioiTinh, "true")
+                                @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
+
+                                <div class="form-field">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "full-width", @placeholder = "Tên đăng nhập*", @required = "true", @type = "email" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-field">
+                                    @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "full-width", @placeholder = "Tên đăng nhập*", @required = "true" } })
+                                    @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-field">
+                                    @Html.TextBoxFor(model => model.NgaySinh, "{0:yyyy-MM-dd}", new { @class = "full-width", @placeholder = "Tên đăng nhập*", @required = "true", @type = "date" })
+                                    @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                                </div>
+                                <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Save" type="submit">
+                            </fieldset>
+                        }
+                    </div>
+                    <!-- END respond-->
+
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+@section Scripts
+{
+    @{
+        var message_done = ViewBag.Done;
+        var message_err = ViewBag.Error;
+    }
+    <script>
+    var message_done = '@Html.Raw(message_done)';
+    var message_err = '@Html.Raw(message_err)';
+    console.log(message_done)
+    if (message_done != "" && message_done != null) {
+        toastr.success(message_done, 'Thành công!');
+    } else if (message_err != "" && message_err != null) {
+        toastr.error(message_err, 'Lỗi!');
+    }
+    </script>
+}
+
+

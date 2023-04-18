@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_WebReviewFoodModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BaiViet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TieuDe" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="NoiDung" Type="ntext" Nullable="false" />
+    <Property Name="HinhAnh" Type="text" Nullable="false" />
+    <Property Name="IdDanhMuc" Type="int" Nullable="false" />
+    <Property Name="NgayTao" Type="datetime" Nullable="false" />
+    <Property Name="NgaySua" Type="datetime" Nullable="false" />
+    <Property Name="TrangThai" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DanhGias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoiDung" Type="ntext" Nullable="false" />
+    <Property Name="IdTinTuc" Type="int" Nullable="false" />
+    <Property Name="IdTaiKhoan" Type="int" Nullable="false" />
+    <Property Name="NgayTao" Type="datetime" Nullable="false" />
+    <Property Name="NgaySua" Type="datetime" Nullable="false" />
+    <Property Name="TrangThai" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DanhMucs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDanhMuc" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NgayTao" Type="datetime" Nullable="false" />
+    <Property Name="NgaySua" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TaiKhoans">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="GioiTinh" Type="bit" />
+    <Property Name="TenDangNhap" Type="nvarchar" MaxLength="20" />
+    <Property Name="MatKhau" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="20" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+    <Property Name="TrangThai" Type="bit" />
+    <Property Name="Quyen" Type="bit" Nullable="false" />
+    <Property Name="NgaySinh" Type="date" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_DanhGia_TaiKhoan">
+    <End Role="TaiKhoans" Type="Self.TaiKhoans" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DanhGias" Type="Self.DanhGias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoans">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DanhGias">
+        <PropertyRef Name="IdTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DanhGia_TinTuc">
+    <End Role="BaiViet" Type="Self.BaiViet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DanhGias" Type="Self.DanhGias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BaiViet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DanhGias">
+        <PropertyRef Name="IdTinTuc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TinTuc_DanhMuc">
+    <End Role="DanhMucs" Type="Self.DanhMucs" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="BaiViet" Type="Self.BaiViet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DanhMucs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BaiViet">
+        <PropertyRef Name="IdDanhMuc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_WebReviewFoodModelStoreContainer">
+    <EntitySet Name="BaiViet" EntityType="Self.BaiViet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DanhGias" EntityType="Self.DanhGias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DanhMucs" EntityType="Self.DanhMucs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoans" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_DanhGia_TaiKhoan" Association="Self.FK_DanhGia_TaiKhoan">
+      <End Role="TaiKhoans" EntitySet="TaiKhoans" />
+      <End Role="DanhGias" EntitySet="DanhGias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DanhGia_TinTuc" Association="Self.FK_DanhGia_TinTuc">
+      <End Role="BaiViet" EntitySet="BaiViet" />
+      <End Role="DanhGias" EntitySet="DanhGias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TinTuc_DanhMuc" Association="Self.FK_TinTuc_DanhMuc">
+      <End Role="DanhMucs" EntitySet="DanhMucs" />
+      <End Role="BaiViet" EntitySet="BaiViet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

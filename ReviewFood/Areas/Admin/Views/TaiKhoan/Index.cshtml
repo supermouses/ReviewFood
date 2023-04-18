@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ReviewFood.Models.TaiKhoan>
+@{
+    ViewData["Title"] = "Index tài khoản";
+    ViewData["TitleHeader"] = "Danh sách tài khoản";
+}
+
+<table class="table table-striped" border="1">
+    <thead class=" table-success ">
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.HoTen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GioiTinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quyen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgaySinh)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTen)
+            </td>
+            <td>
+                @if (item.TrangThai == true)
+                {
+                    <p>Nam</p>
+                }
+                else
+                {
+                    <p>Nữ</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @if (item.TrangThai == true)
+                {
+                    <p>Kích hoạt</p>
+                }
+                else
+                {
+                    <p>Vô hiệu</p>
+                }
+            </td>
+            <td>
+                @if (item.Quyen == true)
+                {
+                    <p>Admin</p>
+                }
+                else
+                {
+                    <p>Người dùng</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgaySinh)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

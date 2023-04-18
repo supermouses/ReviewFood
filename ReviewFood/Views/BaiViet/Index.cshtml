@@ -1,0 +1,114 @@
+﻿@model ReviewFood.Models.BaiViet
+<section class="s-content s-content--top-padding s-content--narrow">
+
+    <article class="row entry format-standard">
+
+        <div class="entry__media col-full">
+            <div class="entry__post-thumb">
+                <img src="/Assets/Image/@Model.HinhAnh"
+                     srcset="/Assets/Image/@Model.HinhAnh"
+                     sizes="(max-width: 2000px) 100vw, 2000px" alt="">
+            </div>
+        </div>
+
+        <div class="entry__header col-full">
+            <h1 class="entry__header-title display-1">
+                @Model.TieuDe
+            </h1>
+            <ul class="entry__header-meta">
+                <li class="date">@Model.NgayTao</li>
+            </ul>
+        </div>
+
+    </article> <!-- end entry/article -->
+
+
+    <div class="col-full entry__main">
+        <div class="row s-content__nav">
+            @Html.Raw(Model.NoiDung)
+        </div>
+    </div> <!-- end s-content__pagenav -->
+
+    <div class="comments-wrap">
+
+        <div id="comments" class="row">
+            <div class="col-full">
+                <!-- START commentlist -->
+                <ol class="commentlist">
+                    @foreach (var item in ViewBag.Comments)
+                    {
+                        <li class="depth-1 comment">
+                            <div class="comment__content">
+
+                                <div class="comment__info">
+                                    <div class="comment__author">@item.TaiKhoan</div>
+
+                                    <div class="comment__meta">
+                                        <div class="comment__time">@item.NgayTao</div>
+                                        <div class="comment__reply">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="comment__text">
+                                    <p>
+                                        @item.NoiDung
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </li><!-- end comment level 1 -->
+                    }
+
+
+                </ol>
+                <!-- END commentlist -->
+
+            </div> <!-- end col-full -->
+        </div> <!-- end comments -->
+
+        <div class="row comment-respond">
+
+            <!-- START respond -->
+            <div id="respond" class="col-full">
+
+                <h3 class="h2">Thêm bình luận</h3>
+
+                <form name="contactForm" id="contactForm" method="post" action="/DanhGia/Create" autocomplete="off">
+                    <fieldset>
+                        <div class="message form-field">
+                            <input type="hidden" name="MaTinTuc" value="@Model.Id" hidden />
+                            <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Bình luận*" required></textarea>
+                        </div>
+
+                        <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Thêm bình luận" type="submit">
+
+                    </fieldset>
+                </form> <!-- end form -->
+
+            </div>
+            <!-- END respond-->
+
+        </div> <!-- end comment-respond -->
+
+    </div> <!-- end comments-wrap -->
+
+</section>
+@section Scripts
+{
+    @{
+        var message_done = ViewBag.Done;
+        var message_err = ViewBag.Error;
+    }
+    <script>
+        var message_done = '@Html.Raw(message_done)';
+        var message_err = '@Html.Raw(message_err)';
+        console.log(message_done)
+        if (message_done != "" && message_done != null) {
+            toastr.success(message_done, 'Thành công!');
+        } else if (message_err != "" && message_err != null) {
+            toastr.error(message_err, 'Lỗi!');
+        }
+    </script>
+}

@@ -1,0 +1,74 @@
+﻿
+<section class="s-content s-content--top-padding s-content--narrow">
+
+    <article class="row entry format-standard">
+
+        <div class="entry__media col-full">
+            <div class="card card-primary content">
+                <div class="row">
+
+                    <!-- START respond -->
+                    <div id="respond" class="col-full">
+                        <h3 class="h2">Đăng ký</h3>
+                        <form name="contactForm" id="contactForm" method="post" action="/TaiKhoan/Create" autocomplete="off">
+                            <fieldset>
+
+                                <div class="form-field">
+                                    <input name="TenDangNhap" id="cName" class="full-width" placeholder="Tên đăng nhập*" value="" type="text" required>
+                                </div>
+
+                                <div class="form-field">
+                                    <input name="HoTen" id="cName" class="full-width" placeholder="Họ tên*" value="" type="text" required>
+                                </div>
+
+                                <div class="form-field">
+                                    <input name="MatKhau" class="full-width" placeholder="Mật khẩu*" value="" type="password" required>
+                                </div>
+
+                                <div class="form-field">
+                                    Giới tính:  <input type="radio" name="GioiTinh" value="true" checked /> Nam
+                                    <input type="radio" name="GioiTinh" value="false" /> Nữ
+                                </div>
+
+                                <div class="form-field">
+                                    <input name="Email" id="cName" class="full-width" placeholder="Địa chỉ Email*" value="" type="email" required>
+                                </div>
+
+                                <div class="form-field">
+                                    <input name="DiaChi" id="cName" class="full-width" placeholder="Địa chỉ*" value="" type="text" required>
+                                </div>
+                                <div class="form-field">
+                                    <input name="NgaySinh" id="cName" class="full-width" placeholder="Ngày sinh*" value="" type="date" required>
+                                </div>
+
+                                <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Create" type="submit">
+
+                            </fieldset>
+                        </form> <!-- end form -->
+
+                    </div>
+                    <!-- END respond-->
+
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+@section Scripts
+{
+    @{
+        var message_done = ViewBag.Done;
+        var message_err = ViewBag.Error;
+    }
+    <script>
+    var message_done = '@Html.Raw(message_done)';
+    var message_err = '@Html.Raw(message_err)';
+    console.log(message_done)
+    if (message_done != "" && message_done != null) {
+        toastr.success(message_done, 'Thành công!');
+    } else if (message_err != "" && message_err != null) {
+        toastr.error(message_err, 'Lỗi!');
+    }
+    </script>
+}
+

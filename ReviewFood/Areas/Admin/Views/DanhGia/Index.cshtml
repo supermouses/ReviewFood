@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "Bình luận";
+    ViewData["TitleHeader"] = "Danh sách bình luận";
+}
+
+<h2>Index</h2>
+
+<table class="table table-striped" border="1">
+    <thead class=" table-success ">
+        <tr>
+            <th scope="col">
+                Nội dung
+            </th>
+            <th>
+                Tài khoản
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in ViewBag.Data)
+    {
+        <tr>
+            <td>
+                @item.NoiDung
+            </td>
+            <td>
+                @item.TaiKhoan
+            </td>
+            <td>
+                @item.NgayTao
+            </td>
+            <td>
+                @if (item.TrangThai == true)
+                {
+                    <p>Kích hoạt</p>
+                }
+                else
+                {
+                    <p>Vô hiệu</p>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Đổi Bài Viết", "Change", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+@section Scripts
+{
+    @{
+        var message_done = ViewBag.Done;
+        var message_err = ViewBag.Error;
+    }
+    <script>
+        var message_done = '@Html.Raw(message_done)';
+        var message_err = '@Html.Raw(message_err)';
+        console.log(message_done)
+        if (message_done != "" && message_done != null) {
+            toastr.success(message_done, 'Thành công!');
+        } else if (message_err != "" && message_err != null) {
+            toastr.error(message_err, 'Lỗi!');
+        }
+    </script>
+}
+

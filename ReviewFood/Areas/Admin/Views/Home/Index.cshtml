@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; ViewData["Title"] = "Home Page";
+    var Count = ViewBag.Data as int[];
+    ViewData["TitleHeader"] = "Thống kê chung";
+}
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-12">
+        <div class="card card-sm-3">
+            <div class="card-icon bg-primary">
+                <i class="ion ion-person"></i>
+            </div>
+            <div class="card-wrap">
+                <div class="card-header">
+                    <h4>Tổng số Danh mục</h4>
+                </div>
+                <div class="card-body">
+                    @Count[0]
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-12">
+        <div class="card card-sm-3">
+            <div class="card-icon bg-danger">
+                <i class="ion ion-ios-paper-outline"></i>
+            </div>
+            <div class="card-wrap">
+                <div class="card-header">
+                    <h4>Tổng số Tin tức</h4>
+                </div>
+                <div class="card-body">
+                    @Count[1]
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-12">
+        <div class="card card-sm-3">
+            <div class="card-icon bg-warning">
+                <i class="ion ion-paper-airplane"></i>
+            </div>
+            <div class="card-wrap">
+                <div class="card-header">
+                    <h4>Tổng số tài khoản</h4>
+                </div>
+                <div class="card-body">
+                    @Count[2]
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="display-2">Welcome to Website Admin</div>
+    </div>
+</div>
+

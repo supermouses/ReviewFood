@@ -1,0 +1,79 @@
+﻿@model ReviewFood.Models.BaiViet_DanhMuc
+@{
+    ViewBag.Title = "Home Page";
+}
+<section class="s-featured">
+    <div class="row">
+        <div class="col-full">
+
+            <div class="featured-slider featured" data-aos="zoom-in">
+                @foreach (var item in ViewBag.Featured)
+                {
+                    <div class="featured__slide">
+
+                        <div class="entry">
+
+                            <div class="entry__background" style="background-image:url('/Assets/Image/@item.HinhAnh');"></div>
+
+                            <div class="entry__content">
+                                <span class="entry__category"><a href="/DanhMuc/Index/@item.MaDanhMuc">@item.DanhMuc</a></span>
+
+                                <h1><a href="/TinTuc/Index/@item.MaTinTuc" title="">@item.TieuDe</a></h1>
+
+                                <div class="entry__info">
+                                    <ul class="entry__meta">
+                                        <li>@item.NgayTao</li>
+                                    </ul>
+                                </div>
+                            </div> <!-- end entry__content -->
+
+                        </div> <!-- end entry -->
+
+                    </div>
+                }
+
+            </div> <!-- end featured -->
+
+        </div> <!-- end col-full -->
+    </div>
+</section>
+
+
+<section class="s-content">
+
+    <div class="row entries-wrap wide">
+        <div class="entries">
+            @foreach (var item in ViewBag.TopTen)
+            {
+                <article class="col-block">
+
+                    <div class="item-entry" data-aos="zoom-in">
+                        <div class="item-entry__thumb">
+                            <a href="/TinTuc/Index/@item.MaTinTuc" class="item-entry__thumb-link">
+                                <img src="/Assets/Image/@item.HinhAnh"
+                                     srcset="/Assets/Image/@item.HinhAnh" alt="">
+                            </a>
+                        </div>
+
+                        <div class="item-entry__text">
+                            <div class="item-entry__cat">
+                                <a href="/DanhMuc/Index/@item.MaDanhMuc">@item.DanhMuc</a>
+                            </div>
+
+                            <h1 class="item-entry__title">
+                                <a href="/TinTuc/Index/@item.MaTinTuc">@item.TieuDe</a>
+                            </h1>
+
+                            <div class="item-entry__date">
+                                <a href="/TinTuc/Index/@item.MaTinTuc">@item.NgayTao</a>
+                            </div>
+                        </div>
+                    </div> <!-- item-entry -->
+
+                </article> <!-- end article -->
+            }
+
+        </div> <!-- end entries -->
+    </div> <!-- end entries-wrap -->
+
+</section> <!-- end s-content -->

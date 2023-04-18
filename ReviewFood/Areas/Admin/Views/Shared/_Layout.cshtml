@@ -1,0 +1,137 @@
+﻿
+@{
+    string data = Session["TaiKhoan"].ToString();
+    string[] Account = new string[3];
+    Account = (data != null) ? data.Split(',') : Account;
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
+    <title>@ViewData["Title"] - Tin tức</title>
+
+    <link rel="stylesheet" href="/Assets/admin/dist/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Assets/admin/dist/modules/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="/Assets/admin/dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/Assets/admin/dist/modules/toastr/build/toastr.min.css">
+    <link rel="stylesheet" href="/Assets/admin/dist/modules/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="/Assets/admin/dist/modules/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/Assets/admin/dist/css/demo.css">
+    <link rel="stylesheet" href="/Assets/admin/dist/css/style.css">
+    <link rel="stylesheet" href="/Assets/admin/dist/css/select2.min.css">
+    <link rel="stylesheet" href="/Assets/admin/dist/css/select2-bootstrap4.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="main-wrapper">
+            <div class="navbar-bg"></div>
+            <nav class="navbar navbar-expand-lg main-navbar">
+                <form class="form-inline mr-auto">
+                    <ul class="navbar-nav mr-3">
+                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="ion ion-navicon-round"></i></a></li>
+                        <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="ion ion-search"></i></a></li>
+                    </ul>
+
+                </form>
+                <ul class="navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
+                            <i class="ion ion-android-person d-lg-none"></i>
+                            <div class="d-sm-none d-lg-inline-block">Hi, @Account[1]</div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="/Admin/TaiKhoan/Details/@Account[2]" class="dropdown-item has-icon">
+                                <i class="ion ion-android-person"></i> Profile
+                            </a>
+                            <a href="/Admin/Login/Logout" class="dropdown-item has-icon">
+                                <i class="ion ion-log-out"></i> Logout
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <div class="main-sidebar">
+                <aside id="sidebar-wrapper">
+                    <div class="sidebar-brand">
+                        <a href="/">Stisla Lite</a>
+                    </div>
+                    <div class="sidebar-user">
+                        <div class="sidebar-user-picture">
+                            <img alt="image" src="/Assets/admin/dist//img/avatar/avatar-1.jpeg">
+                        </div>
+                        <div class="sidebar-user-details">
+                            <div class="user-name">@Account[1]</div>
+                            <div class="user-role">
+                                @Account[0]
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li class="menu-header">Dashboard</li>
+                        <li class="active">
+                            <a href="/"><i class="ion ion-speedometer"></i><span>Trang chủ</span></a>
+                        </li>
+
+                        <li class="menu-header">Components</li>
+                        <li>
+                            <a href="#" class="has-dropdown"><i class="ion ion-ios-albums-outline"></i><span>Danh mục</span></a>
+                            <ul class="menu-dropdown">
+                                <li><a href="/Admin/DanhMuc/Index"><i class="ion ion-ios-circle-outline"></i> Danh sách</a></li>
+                                <li><a href="/Admin/DanhMuc/Create"><i class="ion ion-ios-circle-outline"></i> Thêm</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="has-dropdown"><i class="ion ion-ios-nutrition"></i> Tin tức</a>
+                            <ul class="menu-dropdown">
+                                <li><a href="/Admin/TinTuc/Index"><i class="ion ion-ios-circle-outline"></i> Danh sách</a></li>
+                                <li><a href="/Admin/TinTuc/Create"><i class="ion ion-ios-circle-outline"></i> Thêm</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="has-dropdown"><i class="ion ion-ios-copy-outline"></i><span>Tài khoản</span></a>
+                            <ul class="menu-dropdown">
+                                <li><a href="/Admin/TaiKhoan/Index"><i class="ion ion-ios-circle-outline"></i> Danh sách</a></li>
+                                <li><a href="/Admin/TaiKhoan/Create"><i class="ion ion-ios-circle-outline"></i> Thêm</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+            <div class="main-content">
+                <section class="section">
+                    <h1 class="section-header">
+                        @ViewData["TitleHeader"]
+                    </h1>
+                    @RenderBody()
+                </section>
+            </div>
+            <footer class="main-footer">
+                <div class="footer-left">
+                    Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://multinity.com/">Multinity</a>
+                </div>
+                <div class="footer-right"></div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="/Assets/admin/dist/modules/jquery.min.js"></script>
+    <script src="/Assets/admin/dist/modules/popper.js"></script>
+    <script src="/Assets/admin/dist/modules/tooltip.js"></script>
+    <script src="/Assets/admin/dist/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/Assets/admin/dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="/Assets/admin/dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+    <script src="/Assets/admin/dist/js/sa-functions.js"></script>
+    <script src="/Assets/admin/dist/js/select2.min.js"></script>
+    <script src="/Assets/admin/dist/modules/chart.min.js"></script>
+    <script src="/Assets/admin/dist/modules/summernote/summernote-lite.js"></script>
+    <script src="/Assets/admin/dist/modules/toastr/build/toastr.min.js"></script>
+    <script src="~/Assets/ckeditor/ckeditor.js"></script>
+    @RenderSection("Scripts", required: false)
+    <script src="/Assets/admin/dist/js/scripts.js"></script>
+    <script src="/Assets/admin/dist/js/custom.js"></script>
+    <script src="/Assets/admin/dist/js/demo.js"></script>
+</body>
+</html>
+
