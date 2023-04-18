@@ -1,18 +1,20 @@
 ﻿@model IEnumerable<ReviewFood.Models.BaiViet>
+
 @{
     ViewBag.Title = "Index";
-    Layout = "~Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 
 
 <form method="get" asp-controller="TinTuc" asp-action="Index" class="p-4">
     <div class="row">
         <div class="col-4">
             <select name="IdDanhMuc" class="form-control" value="@ViewBag.IdDanhMuc">
-                <option value="0" @if(ViewBag.IdDanhMuc == 0){<text>selected="selected"</text>}>Tất cả</option>
+                <option value="0" @if (ViewBag.IdDanhMuc == 0) { <text> selected="selected" </text> }>Tất cả</option>
                 @foreach (var item in ViewBag.DanhMucs)
                 {
-                    <option value="@item.Id" @if(ViewBag.IdDanhMuc == item.Id){<text>selected="selected"</text>}>@item.TenDanhMuc</option>
+                    <option value="@item.Id" @if (ViewBag.IdDanhMuc == item.Id) { <text> selected="selected" </text> }>@item.TenDanhMuc</option>
                 }
             </select>
         </div>
@@ -61,9 +63,9 @@
                 {
                     <p>Kích hoạt</p>
                 }
-                else 
+                else
                 {
-                <p>Vô hiệu</p>
+                    <p>Vô hiệu</p>
                 }
             </td>
             <td>
