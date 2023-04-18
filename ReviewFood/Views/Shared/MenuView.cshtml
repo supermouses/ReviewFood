@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ReviewFood.Models.DanhMuc>
+
+<nav class="header__nav-wrap">
+
+    <h2 class="header__nav-heading h6">Navigate to</h2>
+
+    <ul class="header__nav">
+        <li class="current"><a href="/" title="">Home</a></li>
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="/DanhMuc/Index/@item.Id" title="">@item.TenDanhMuc</a>
+            </li>
+        }
+        @if (Session["TaiKhoan"] == null)
+        {
+            <li><a href="/TaiKhoan/Login" title="">Đăng nhập</a></li>
+            <li><a href="/TaiKhoan/Create" title="">Đăng ký</a></li>
+        }
+        else
+        {
+            string data = Session["TaiKhoan"].ToString();
+            string[] Account = new string[3];
+            Account = (data != null) ? data.Split(',') : Account;
+            <li><a href="/TaiKhoan/Edit/@Account[2]" title="">Tài khoản</a></li>
+            <li><a href="/TaiKhoan/Logout" title="">Đặng xuất</a></li>
+        }
+
+
+    </ul> <!-- end header__nav -->
+
+    <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
+
+</nav>

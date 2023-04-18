@@ -23,31 +23,31 @@ namespace ReviewFood.Controllers
         public ActionResult Login(string TenDangNhap, string MatKhau)
         {
             var data = db.TaiKhoans.Where(tk => tk.TenDangNhap == TenDangNhap && tk.MatKhau == MatKhau).FirstOrDefault();
-            //if (data == null)
-            //{
-            //    ViewBag.Error = "Thông tin đăng nhập không đúng";
-            //    return View();
-            //}
-            //else
-            //{
-            //    string data_account = data.TenDangNhap + "," + data.HoTen + "," + data.Id;
-            //    //Session["TaiKhoan"] = data;
-            //    Session.Add("TaiKhoan", data_account);
-            //    return Redirect("/");
-            //}
-                if (data.Quyen == true)
-                {
-                    Session["TaiKhoan"] = data;
-                    return RedirectToAction("Index", "Admin/Admin");
-                }
-                else
-                {
-                    Session["TaiKhoan"] = data;
-                    return RedirectToAction("Home", "Home");
-                }
+            if (data == null)
+            {
+                ViewBag.Error = "Thông tin đăng nhập không đúng";
+                return View();
             }
-
-        public ActionResult Logout()
+            else
+            {
+                string data_account = data.TenDangNhap + "," + data.HoTen + "," + data.Id;
+                //Session["TaiKhoan"] = data;
+                Session.Add("TaiKhoan", data_account);
+                return Redirect("/");
+            }
+            //    if (data.Quyen == true)
+            //    {
+            //        Session["TaiKhoan"] = data;
+            //        return RedirectToAction("Index", "Admin/Admin");
+            //    }
+            //    else
+            //    {
+            //        Session["TaiKhoan"] = data;
+            //        return RedirectToAction("Home", "Home");
+            //    }
+            //}
+        }
+            public ActionResult Logout()
         {
             Session.Remove("TaiKhoan");
             return Redirect("/");

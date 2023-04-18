@@ -1,42 +1,82 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .navbar {
+            background-color: black;
+        }
+
+        .container {
+            color: black;
+        }
+
+        footer {
+            display: block;
+            text-align: center;
+            color: blue;
+        }
+    </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
+    <div class="navbar-inverse navbar-fixed-top ">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @*<a href="@Url.Action("Detail", "Home",new {id=item.maphim})"><img src="@item.hinh" width="200px"> </a>*@
+            @Html.ActionLink("Trang Chủ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) @*<img src="~/Content/Images/Logo.png" width="px">*@
+
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                @*<li>@Html.ActionLink("Đăng Ký", "DangKy", "NguoiDung")</li>*@
+                @*<li>@Html.ActionLink("Đăng Nhập", "DangNhap", "NguoiDung")</li>*@
+                @*<li>@Html.ActionLink("Đăng Xuất", "DangNhap", "NguoiDung")</li>*@
+
+            </ul>
+            @{
+                var u = Session["TaiKhoan"] as ReviewFood.Models.TaiKhoan;
+            }
+            @{
+                if (u != null)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Xin chào @u.HoTen <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="btn btn-light"><a href="/TaiKhoan/DangXuat">Log off</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <a class="btn btn-dark" href="/TaiKhoan/Create"> Đăng ký</a>
+                        <a class="btn btn-light" href="/TaiKhoan/Login"> Đăng nhập</a>
+                    </ul>
+                }
+            }
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; Coppyright</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @RenderSection("upload", required: false)
 </body>
 </html>
