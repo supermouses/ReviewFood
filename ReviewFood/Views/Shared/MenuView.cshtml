@@ -22,8 +22,20 @@
             string data = Session["TaiKhoan"].ToString();
             string[] Account = new string[3];
             Account = (data != null) ? data.Split(',') : Account;
-            <li><a href="/TaiKhoan/Edit/@Account[2]" title="">Tài khoản</a></li>
-            <li><a href="/TaiKhoan/Logout" title="">Đặng xuất</a></li>
+    <li class="dropdown">
+        <a href="/TaiKhoan/Edit/@Account[2]"
+           class="dropdown-toggle"
+           data-toggle="dropdown"
+           role="button"
+           aria-haspopup="true"
+           aria-expanded="false">
+            Xin chào 
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="btn btn-light"><a href="/TaiKhoan/Logout">Đăng Xuất</a></li>
+        </ul>
+    </li>
         }
 
 

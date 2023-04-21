@@ -136,5 +136,10 @@ namespace ReviewFood.Areas.Admin.Controllers
             }
             return RedirectToAction("Index", "TaiKhoan");
         }
+        public ActionResult Logout()
+        {
+            Session.Remove("TaiKhoan");
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

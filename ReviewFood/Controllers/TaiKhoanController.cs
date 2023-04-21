@@ -14,7 +14,10 @@ namespace ReviewFood.Controllers
         public ActionResult Login()
         {
             if (Session["TaiKhoan"] == null)
+            {
+                ViewBag.Error = "Thông tin đăng nhập không đúng";
                 return View();
+            }
             else
                 return Redirect("/");
         }
@@ -23,33 +26,30 @@ namespace ReviewFood.Controllers
         public ActionResult Login(string TenDangNhap, string MatKhau)
         {
             var data = db.TaiKhoans.Where(tk => tk.TenDangNhap == TenDangNhap && tk.MatKhau == MatKhau).FirstOrDefault();
-            //if (data == null)
-            //{
-            //    ViewBag.Error = "Thông tin đăng nhập không đúng";
-            //    return View();
-            //}
-            //else
-            //{
-            //    string data_account = data.TenDangNhap + "," + data.HoTen + "," + data.Id;
-            //    //Session["TaiKhoan"] = data;
-            //    Session.Add("TaiKhoan", data_account);
-            //    return Redirect("/");
-            //}
+            if (data == null)
+            {
+                ViewBag.Error = "Thông tin đăng nhập không đúng";
+                return View();
+            }
             if (data.Quyen == true)
             {
                 Session["TaiKhoan"] = data;
-                return RedirectToAction("Index", "Admin/TaiKhoan");
+                return RedirectToAction("Index", "Admin/Home");
             }
             else
             {
-                Session["TaiKhoan"] = data;
-                return RedirectToAction("Index", "Home");
+                string data_account = data.TenDangNhap + "," + data.HoTen + "," + data.Id;
+                //Session["TaiKhoan"] = data;
+                Session.Add("TaiKhoan", data_account);
+                return Redirect("/");
             }
         }
             public ActionResult Logout()
         {
             Session.Remove("TaiKhoan");
             return Redirect("/");
+            //Session.Abandon();
+            //return RedirectToAction("Login", "TaiKhoan");
         }
 
         public ActionResult Create()
@@ -116,7 +116,7 @@ namespace ReviewFood.Controllers
                 tk.DiaChi = taiKhoans.DiaChi;
                 tk.NgaySinh = taiKhoans.NgaySinh;
                 db.SaveChanges();
-                ViewBag.Done = "Sửa tin tức thành công";
+                ViewBag.Done = "Sửa tài khoản thành công";
             }
             catch (Exception ex)
             {
