@@ -15,7 +15,6 @@ namespace ReviewFood.Controllers
         {
             if (Session["TaiKhoan"] == null)
             {
-                ViewBag.Error = "Thông tin đăng nhập không đúng";
                 return View();
             }
             else
@@ -33,11 +32,13 @@ namespace ReviewFood.Controllers
             }
             if (data.Quyen == true)
             {
+                ViewBag.Done = "Chào mừng Admin";
                 Session["TaiKhoan"] = data;
                 return RedirectToAction("Index", "Admin/Home");
             }
             else
             {
+                ViewBag.Done = "Đăng nhập thành công";
                 string data_account = data.TenDangNhap + "," + data.HoTen + "," + data.Id;
                 //Session["TaiKhoan"] = data;
                 Session.Add("TaiKhoan", data_account);

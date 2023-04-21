@@ -19,35 +19,35 @@
                             <fieldset>
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model.Id)
-                                <div class="form-field">
-                                    @Html.EditorFor(model => model.TenDangNhap, new { htmlAttributes = new { @class = "full-width", @placeholder = "Tên đăng nhập*", @readonly = "true" } })
+                                <div class="form-field"> Tên Đăng Nhập
+                                    @Html.EditorFor(model => model.TenDangNhap, "Tên Đăng Nhập", new { htmlAttributes = new { @class = "full-width", @placeholder = "Tên đăng nhập*", @readonly = "true" } })
                                     @Html.ValidationMessageFor(model => model.TenDangNhap, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="form-field">
-                                    @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "full-width", @placeholder = "Họ tên*", @required = "true" } })
+                                <div class="form-field"> Họ Tên
+                                    @Html.EditorFor(model => model.HoTen, "Họ Tên", new { htmlAttributes = new { @class = "full-width", @placeholder = "Họ tên*", @required = "true" } })
                                     @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
                                 </div>
 
-                                <div class="form-field">
-                                    @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "full-width", @placeholder = "Mật khẩu*", @required = "true", @type = "password" } })
+                                <div class="form-field">Mật Khẩu
+                                    @Html.EditorFor(model => model.MatKhau, "Mật Khẩu", new { htmlAttributes = new { @class = "full-width", @placeholder = "Mật khẩu*", @required = "true", @type = "password" } })
                                     @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
                                 </div>
-
+                                Giới Tính:
                                 Nữ:   @Html.RadioButtonFor(model => model.GioiTinh, "false") &emsp;&emsp;
                                 Nam: @Html.RadioButtonFor(model => model.GioiTinh, "true")
                                 @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
 
-                                <div class="form-field">
+                                <div class="form-field">Email
                                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "full-width", @placeholder = "Tên đăng nhập*", @required = "true", @type = "email" } })
                                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                 </div>
 
-                                <div class="form-field">
+                                <div class="form-field">Địa Chỉ
                                     @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "full-width", @placeholder = "Tên đăng nhập*", @required = "true" } })
                                     @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
                                 </div>
 
-                                <div class="form-field">
+                                <div class="form-field">Ngày Sinh
                                     @Html.TextBoxFor(model => model.NgaySinh, "{0:yyyy-MM-dd}", new { @class = "full-width", @placeholder = "Tên đăng nhập*", @required = "true", @type = "date" })
                                     @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
                                 </div>

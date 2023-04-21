@@ -175,7 +175,7 @@ namespace ReviewFood.Areas.Admin.Controllers
                 tt.TrangThai = tinTucs.TrangThai;
             };
             db.SaveChanges();
-            ViewBag.Done = "Sửa tin tức thành công";
+            ViewBag.Done = "Sửa bài viết thành công";
             ViewBag.DanhMucs = db.DanhMucs.ToList();
             return View(tinTucs);
         }
@@ -221,6 +221,8 @@ namespace ReviewFood.Areas.Admin.Controllers
                 case ".png":
                     return true;
                 case ".gif":
+                    return true;
+                case ".veg":
                     return true;
                 default:
                     return false;

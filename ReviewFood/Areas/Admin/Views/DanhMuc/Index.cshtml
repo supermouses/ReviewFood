@@ -4,18 +4,21 @@
     ViewData["TitleHeader"] = "Danh sách Danh mục";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-@Html.ActionLink("Tạo Mới", "Create")
+@*@Html.ActionLink("Tạo Mới", "Create")*@
 <table class="table table-striped" border="1">
     <thead class=" table-success ">
         <tr>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.TenDanhMuc)
+                @*@Html.DisplayNameFor(model => model.TenDanhMuc)*@
+                Tên Danh Mục
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.NgayTao)
+                @*@Html.DisplayNameFor(model => model.NgayTao)*@
+                Ngày Tạo
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.NgaySua)
+                @*@Html.DisplayNameFor(model => model.NgaySua)*@
+                Ngày Sửa
             </th>
             <th></th>
         </tr>
