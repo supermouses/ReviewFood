@@ -3,8 +3,8 @@
     string data = Session["TaiKhoan"].ToString();
     string[] Account = new string[3];
     Account = (data != null) ? data.Split(',') : Account;
-
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +44,7 @@
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
                         <li class="active">
-                            <a href="/TaiKhoan/Logout"><i class="ion ion-speedometer"></i><span>Trang Chủ Home</span></a>
+                            <a href="/TaiKhoan/AdminToHome"><i class="ion ion-speedometer"></i><span>Trang Chủ Home</span></a>
                         </li>
 
                         <li class="menu-header">Components</li>

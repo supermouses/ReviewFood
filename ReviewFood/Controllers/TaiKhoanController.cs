@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -33,25 +34,30 @@ namespace ReviewFood.Controllers
             if (data.Quyen == true)
             {
                 ViewBag.Done = "Chào mừng Admin";
-                Session["TaiKhoan"] = data;
+                Session["TaiKhoan"] = data.TenDangNhap + "," + data.HoTen + "," + data.Id + ",true";
                 return RedirectToAction("Index", "Admin/Home");
             }
             else
             {
                 ViewBag.Done = "Đăng nhập thành công";
-                string data_account = data.TenDangNhap + "," + data.HoTen + "," + data.Id;
+                string data_account = data.TenDangNhap + "," + data.HoTen + "," + data.Id + ",";
                 //Session["TaiKhoan"] = data;
                 Session.Add("TaiKhoan", data_account);
                 return Redirect("/");
             }
         }
             public ActionResult Logout()
-        {
-            Session.Remove("TaiKhoan");
-            return Redirect("/");
-            //Session.Abandon();
-            //return RedirectToAction("Login", "TaiKhoan");
-        }
+            {
+                Session.Remove("TaiKhoan");
+                return Redirect("/");
+                //Session.Abandon();
+                //return RedirectToAction("Login", "TaiKhoan");
+            }
+
+            public ActionResult AdminToHome()
+            {
+                return Redirect("/");
+            }
 
         public ActionResult Create()
         {

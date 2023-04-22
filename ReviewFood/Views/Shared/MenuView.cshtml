@@ -20,25 +20,49 @@
         else
         {
             string data = Session["TaiKhoan"].ToString();
-            string[] Account = new string[3];
-            Account = (data != null) ? data.Split(',') : Account;
-    <li class="dropdown">
-        <a href="/TaiKhoan/Edit/@Account[2]"
-           class="dropdown-toggle"
-           data-toggle="dropdown"
-           role="button"
-           aria-haspopup="true"
-           aria-expanded="false">
-            Xin chào 
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li class="btn-outline-success"><a href="/TaiKhoan/Logout">Đăng Xuất</a></li>
-        </ul>
-    </li>
+            if (data == null)
+            {
+                <li><a href="/TaiKhoan/Login" title="">Đăng nhập</a></li>
+                <li><a href="/TaiKhoan/Create" title="">Đăng ký</a></li>
+            }
+            else
+            {
+                if (data.Split(',')[3] == "true")
+                {
+                    <li class="dropdown">
+                        <a href="/Admin/Home"
+                           class="dropdown-toggle"
+                           data-toggle="dropdown"
+                           role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            Admin Page
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="btn-outline-success"><a href="/TaiKhoan/Logout">Đăng Xuất</a></li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li class="dropdown">
+                        <a href="/TaiKhoan/Edit/@data.Split(',')[2]"
+                           class="dropdown-toggle"
+                           data-toggle="dropdown"
+                           role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            Xin chào
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="btn-outline-success"><a href="/TaiKhoan/Logout">Đăng Xuất</a></li>
+                        </ul>
+                    </li>
+                }
+            }
         }
-
-
     </ul> <!-- end header__nav -->
 
     <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
