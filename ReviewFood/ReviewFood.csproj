@@ -3960,6 +3960,7 @@
     <Content Include="Views\BaiViet\Index.cshtml" />
     <Content Include="Views\BaiViet\Search.cshtml" />
     <Content Include="Views\Shared\MenuView.cshtml" />
+    <Content Include="Views\BaiViet\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

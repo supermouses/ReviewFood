@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 
 namespace ReviewFood.Controllers
 {
@@ -61,6 +62,85 @@ namespace ReviewFood.Controllers
                                HinhAnh = tt.HinhAnh
                            }).ToPagedList(page, 12);
             return View(TinTucs);
+        }
+        public ActionResult Create()
+        {
+            ViewBag.DanhMucs = db.DanhMucs.ToList();
+            return View();
+        }
+
+        // POST: Admin/BaiViet/Create
+        [HttpPost]
+        [ValidateInput(false)]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(BaiViet baiViet, HttpPostedFileBase img)
+        {
+            try
+            {
+                string filename = "";
+                if (img != null)
+                {
+                    filename = Path.GetFileNameWithoutExtension(img.FileName);
+                }
+
+                else
+                {
+                    filename = "";
+                }
+                if (filename != "")
+                {
+                    string extension = Path.GetExtension(img.FileName);
+                    if (extensionFile(extension) == true)
+                    {
+                        string fileId = Guid.NewGuid().ToString().Replace("-", "");
+                        // tring userId = GetUserId(); Function to get user id based on your schema
+
+
+
+                        //file.SaveAs(path);
+                        var _filename = filename + extension;
+                        filename = filename + extension;
+                        filename = Path.Combine(Server.MapPath("~/Assets/Image"), filename);
+                        img.SaveAs(filename);
+                        baiViet.HinhAnh = _filename;
+                    }
+                    else
+                    {
+                        ViewBag.Error = "File không đúng định dạng, hãy điền lại dữ liệu";
+                        return View(baiViet);
+                    }
+                }
+                baiViet.NgayTao = DateTime.Now;
+                baiViet.NgaySua = DateTime.Now;
+                db.BaiViets.Add(baiViet);
+                db.SaveChanges();
+                ViewBag.Done = "Thêm bài viết thành công";
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+            }
+            ViewBag.DanhMucs = db.DanhMucs.ToList();
+            return View(baiViet);
+        }
+        public bool extensionFile(string extension)
+        {
+            var st_Exten = extension.ToLower();
+            switch (st_Exten)
+            {
+                case ".jpg":
+                    return true;
+                case ".jpeg":
+                    return true;
+                case ".png":
+                    return true;
+                case ".gif":
+                    return true;
+                case ".veg":
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }
