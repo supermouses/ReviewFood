@@ -76,7 +76,7 @@ html, body {
 }
 
 body {
-  background: #111860;
+  background: rgba(0, 0, 0, 0.8);
   font-family: "Nunito Sans", sans-serif;
   font-size: 1.8rem;
   font-style: normal;
@@ -1632,7 +1632,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 .entries .item-entry__title {
-  font-family: "Libre Baskerville", serif;
+  font-family: Arial, bold;
   font-size: 2.8rem;
   line-height: 1.286;
   margin-top: 0;
@@ -4014,7 +4014,10 @@ footer [class*="s-footer__"] > .row [class*="col-"]:last-child {
   top: 0;
   right: 0;
 }
-
+.dark-mode {
+    background-color: black;
+    color: white;
+}
 .comment__meta .comment__time {
   font-size: 1.4rem;
   text-transform: uppercase;

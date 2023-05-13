@@ -91,7 +91,7 @@ namespace ReviewFood.Areas.Admin.Controllers
                 tk.Quyen = taiKhoans.Quyen;
                 tk.NgaySinh = taiKhoans.NgaySinh;
                 db.SaveChanges();
-                ViewBag.Done = "Sửa tin tức thành công";
+                ViewBag.Done = "Sửa tài khoản thành công";
             }
             catch (Exception ex)
             {

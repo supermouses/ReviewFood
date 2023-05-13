@@ -1,9 +1,7 @@
 ﻿@model IEnumerable<ReviewFood.Models.DanhMuc>
-
 <nav class="header__nav-wrap">
 
-    <h2 class="header__nav-heading h6">Navigate to</h2>
-
+    <h2 class="header__nav-heading h1">Navigate to</h2>
     <ul class="header__nav">
         <li class="current"><a href="/" title="">Home</a></li>
         @foreach (var item in Model)
@@ -29,7 +27,7 @@
             {
                 if (data.Split(',')[3] == "true")
                 {
-                    <li class="dropdown">
+                    <li class="dropdown-header">
                         <a href="/Admin/Home"
                            class="dropdown-toggle"
                            data-toggle="dropdown"
@@ -47,7 +45,7 @@
                 else
                 {
                     <li class="dropdown">
-                        <a href="/TaiKhoan/Edit/@data.Split(',')[2]"
+                        <a href="/TaiKhoan/Detail/@data.Split(',')[2]"
                            class="dropdown-toggle"
                            data-toggle="dropdown"
                            role="button"
@@ -57,6 +55,7 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
+                            <li class="btn-outline-success"><a href="/TaiKhoan/Edit/@data.Split(',')[2]">Edit</a></li>
                             <li class="btn-outline-success"><a href="/BaiViet/Create/@data.Split(',')[2]">Tạo Post</a></li>
                             <li class="btn-outline-success"><a href="/TaiKhoan/Logout">Đăng Xuất</a></li>
                         </ul>
@@ -64,8 +63,9 @@
                 }
             }
         }
-    </ul> <!-- end header__nav -->
 
+
+    </ul> <!-- end header__nav -->
     <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
 
 </nav>

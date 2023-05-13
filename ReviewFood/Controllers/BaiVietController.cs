@@ -110,11 +110,12 @@ namespace ReviewFood.Controllers
                         return View(baiViet);
                     }
                 }
+                baiViet.TrangThai = false;
                 baiViet.NgayTao = DateTime.Now;
                 baiViet.NgaySua = DateTime.Now;
                 db.BaiViets.Add(baiViet);
                 db.SaveChanges();
-                ViewBag.Done = "Thêm bài viết thành công";
+                ViewBag.Done = "Thêm bài viết thành công, xin chờ duyệt";
             }
             catch (Exception ex)
             {

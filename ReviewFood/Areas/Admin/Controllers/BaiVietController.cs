@@ -98,7 +98,7 @@ namespace ReviewFood.Areas.Admin.Controllers
                 baiViet.NgaySua = DateTime.Now;
                 db.BaiViets.Add(baiViet);
                 db.SaveChanges();
-                ViewBag.Done = "Thêm danh mục thành công";
+                ViewBag.Done = "Thêm bài viết thành công";
             }
             catch (Exception ex)
             {
