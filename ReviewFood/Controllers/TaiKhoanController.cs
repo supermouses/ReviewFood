@@ -58,11 +58,6 @@ namespace ReviewFood.Controllers
             {
                 return Redirect("/");
             }
-        public ActionResult Detail(int id)
-        {
-            var thongtin = db.TaiKhoans.Where(m => m.Id == id).First();
-            return View(thongtin);
-        }
 
         public ActionResult Create()
         {
@@ -88,7 +83,7 @@ namespace ReviewFood.Controllers
                 db.SaveChanges();
                 ViewBag.Done = "Đăng ký thành công";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
             }
@@ -135,6 +130,11 @@ namespace ReviewFood.Controllers
                 ViewBag.Error = ex.Message;
             }
             return View(taiKhoans);
+        }
+        public ActionResult Detail(int id)
+        {
+            var thongtin = db.TaiKhoans.Where(m => m.Id == id).First();
+            return View(thongtin);
         }
     }
 }

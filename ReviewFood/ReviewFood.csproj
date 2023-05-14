@@ -3954,7 +3954,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\DanhMuc\Index.cshtml" />
     <Content Include="Views\TaiKhoan\Create.cshtml" />
-    <Content Include="Views\TaiKhoan\Details.cshtml" />
+    <Content Include="Views\TaiKhoan\Detail.cshtml" />
     <Content Include="Views\TaiKhoan\Edit.cshtml" />
     <Content Include="Views\TaiKhoan\Login.cshtml" />
     <Content Include="Views\BaiViet\Index.cshtml" />

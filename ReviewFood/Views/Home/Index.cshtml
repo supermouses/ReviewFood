@@ -46,13 +46,15 @@
             @foreach (var item in ViewBag.TopTen)
             {
                 <article class="col-block">
+
                     <div class="item-entry" data-aos="zoom-in">
                         <div class="item-entry__thumb">
                             <a href="/BaiViet/Index/@item.MaTinTuc" class="item-entry__thumb-link">
                                 <img src="/Assets/Image/@item.HinhAnh"
-                                     srcset="/Assets/Image/@item.HinhAnh" alt="images">
+                                     srcset="/Assets/Image/@item.HinhAnh" alt="Đây là hình ảnh">
                             </a>
                         </div>
+
                         <div class="item-entry__text">
                             <div class="item-entry__cat">
                                 <a href="/DanhMuc/Index/@item.MaDanhMuc">@item.DanhMuc</a>
@@ -61,14 +63,12 @@
                             <h1 class="item-entry__title">
                                 <a href="/BaiViet/Index/@item.MaTinTuc">@item.TieuDe</a>
                             </h1>
-                            <div class="item-entry">
-                                <a>User</a>
-                            </div>
+
                             <div class="item-entry__date">
                                 <a href="/BaiViet/Index/@item.MaTinTuc">@item.NgayTao</a>
                             </div>
-                            </div>
-                        </div> <!-- item-entry -->
+                        </div>
+                    </div> <!-- item-entry -->
 
                 </article> <!-- end article -->
             }

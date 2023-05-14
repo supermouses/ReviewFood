@@ -31,9 +31,6 @@
     <thead class=" table-success ">
         <tr>
             <th scope="col">
-                Id
-                </th>
-            <th>
                 @*@Html.DisplayNameFor(model => model.TieuDe)*@ Tiêu Đề 
             </th>
             <th>
@@ -52,9 +49,6 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TieuDe)
             </td>
