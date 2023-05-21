@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="db_WebReviewFoodModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="db_WebReviewFoodModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="BaiViet">
     <Key>
       <PropertyRef Name="Id" />
@@ -12,6 +12,7 @@
     <Property Name="NgayTao" Type="datetime" Nullable="false" />
     <Property Name="NgaySua" Type="datetime" Nullable="false" />
     <Property Name="TrangThai" Type="bit" Nullable="false" />
+    <Property Name="IdTaiKhoan" Type="int" />
   </EntityType>
   <EntityType Name="DanhGias">
     <Key>
@@ -25,6 +26,13 @@
     <Property Name="NgaySua" Type="datetime" Nullable="false" />
     <Property Name="TrangThai" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="DanhMucCha">
+    <Key>
+      <PropertyRef Name="MaDMCha" />
+    </Key>
+    <Property Name="MaDMCha" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDM" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="DanhMucs">
     <Key>
       <PropertyRef Name="Id" />
@@ -33,6 +41,7 @@
     <Property Name="TenDanhMuc" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="NgayTao" Type="datetime" Nullable="false" />
     <Property Name="NgaySua" Type="datetime" Nullable="false" />
+    <Property Name="IdDanhMucCha" Type="int" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -59,6 +68,30 @@
     <Property Name="Quyen" Type="bit" Nullable="false" />
     <Property Name="NgaySinh" Type="date" Nullable="false" />
   </EntityType>
+  <Association Name="FK_BaiViet_DanhMucs">
+    <End Role="DanhMucs" Type="Self.DanhMucs" Multiplicity="1" />
+    <End Role="BaiViet" Type="Self.BaiViet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DanhMucs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BaiViet">
+        <PropertyRef Name="IdDanhMuc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BaiViet_TaiKhoans">
+    <End Role="TaiKhoans" Type="Self.TaiKhoans" Multiplicity="0..1" />
+    <End Role="BaiViet" Type="Self.BaiViet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoans">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BaiViet">
+        <PropertyRef Name="IdTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DanhGia_TaiKhoan">
     <End Role="TaiKhoans" Type="Self.TaiKhoans" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -87,6 +120,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DoanhMuc_DoanhMucCha">
+    <End Role="DanhMucCha" Type="Self.DanhMucCha" Multiplicity="0..1" />
+    <End Role="DanhMucs" Type="Self.DanhMucs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DanhMucCha">
+        <PropertyRef Name="MaDMCha" />
+      </Principal>
+      <Dependent Role="DanhMucs">
+        <PropertyRef Name="IdDanhMucCha" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TinTuc_DanhMuc">
     <End Role="DanhMucs" Type="Self.DanhMucs" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -104,9 +149,18 @@
   <EntityContainer Name="db_WebReviewFoodModelStoreContainer">
     <EntitySet Name="BaiViet" EntityType="Self.BaiViet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DanhGias" EntityType="Self.DanhGias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DanhMucCha" EntityType="Self.DanhMucCha" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DanhMucs" EntityType="Self.DanhMucs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoans" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BaiViet_DanhMucs" Association="Self.FK_BaiViet_DanhMucs">
+      <End Role="DanhMucs" EntitySet="DanhMucs" />
+      <End Role="BaiViet" EntitySet="BaiViet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BaiViet_TaiKhoans" Association="Self.FK_BaiViet_TaiKhoans">
+      <End Role="TaiKhoans" EntitySet="TaiKhoans" />
+      <End Role="BaiViet" EntitySet="BaiViet" />
+    </AssociationSet>
     <AssociationSet Name="FK_DanhGia_TaiKhoan" Association="Self.FK_DanhGia_TaiKhoan">
       <End Role="TaiKhoans" EntitySet="TaiKhoans" />
       <End Role="DanhGias" EntitySet="DanhGias" />
@@ -114,6 +168,10 @@
     <AssociationSet Name="FK_DanhGia_TinTuc" Association="Self.FK_DanhGia_TinTuc">
       <End Role="BaiViet" EntitySet="BaiViet" />
       <End Role="DanhGias" EntitySet="DanhGias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DoanhMuc_DoanhMucCha" Association="Self.FK_DoanhMuc_DoanhMucCha">
+      <End Role="DanhMucCha" EntitySet="DanhMucCha" />
+      <End Role="DanhMucs" EntitySet="DanhMucs" />
     </AssociationSet>
     <AssociationSet Name="FK_TinTuc_DanhMuc" Association="Self.FK_TinTuc_DanhMuc">
       <End Role="DanhMucs" EntitySet="DanhMucs" />

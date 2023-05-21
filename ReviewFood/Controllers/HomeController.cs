@@ -14,6 +14,8 @@ namespace ReviewFood.Controllers
         {
             var featured = (from tt in db.BaiViets
                             join dm in db.DanhMucs on tt.IdDanhMuc equals dm.Id
+                            //join user in db.TaiKhoans on tt.IdTaiKhoan equals user.Id 
+                            where tt.TrangThai == true
                             orderby tt.Id descending
                             select new BaiViet_DanhMuc
                             {
@@ -22,12 +24,15 @@ namespace ReviewFood.Controllers
                                 MaTinTuc = tt.Id,
                                 TieuDe = tt.TieuDe,
                                 NgayTao = tt.NgayTao,
-                                HinhAnh = tt.HinhAnh
+                                HinhAnh = tt.HinhAnh,
+                                //IdUser = user.HoTen 
                             }).Take(3);
             ViewBag.Featured = featured;
 
             ViewBag.TopTen = (from tt in db.BaiViets
                               join dm in db.DanhMucs on tt.IdDanhMuc equals dm.Id
+                              //join user in db.TaiKhoans on tt.IdTaiKhoan equals user.Id 
+                              where tt.TrangThai == true
                               orderby tt.Id descending
                               select new BaiViet_DanhMuc
                               {
@@ -36,7 +41,8 @@ namespace ReviewFood.Controllers
                                   MaTinTuc = tt.Id,
                                   TieuDe = tt.TieuDe,
                                   NgayTao = tt.NgayTao,
-                                  HinhAnh = tt.HinhAnh
+                                  HinhAnh = tt.HinhAnh,
+                                  //IdUser = user.HoTen 
                               }).Take(10);
             return View();
         }

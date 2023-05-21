@@ -163,6 +163,9 @@
     <Compile Include="Models\DanhMuc.cs">
       <DependentUpon>ReviewFoodModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DanhMucCha.cs">
+      <DependentUpon>ReviewFoodModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ReviewFoodModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3677,7 +3680,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\css\base.css" />
+    <Content Include="Content\css\base3.css" />
     <Content Include="Content\css\font-awesome\css\fa-brands.css" />
     <Content Include="Content\css\font-awesome\css\fa-brands.min.css" />
     <Content Include="Content\css\font-awesome\css\fa-regular.css" />
@@ -3691,7 +3694,7 @@
     <Content Include="Content\css\font-awesome\webfonts\fa-brands-400.svg" />
     <Content Include="Content\css\font-awesome\webfonts\fa-regular-400.svg" />
     <Content Include="Content\css\font-awesome\webfonts\fa-solid-900.svg" />
-    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\main2.css" />
     <Content Include="Content\css\vendor.css" />
     <Content Include="Content\images\avatars\user-01.jpg" />
     <Content Include="Content\images\avatars\user-02.jpg" />
@@ -3765,8 +3768,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\ReviewFoodModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ReviewFoodModel.Context.cs</LastGenOutput>
       <DependentUpon>ReviewFoodModel.edmx</DependentUpon>
+      <LastGenOutput>ReviewFoodModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\ReviewFoodModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -3776,13 +3779,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <EntityDeploy Include="Models\ReviewFoodModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ReviewFoodModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ReviewFoodModel.edmx.diagram">
-      <DependentUpon>ReviewFoodModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\BaiViet\Index.cshtml" />
     <Content Include="Areas\Admin\Views\DanhGia\Delete.cshtml" />
@@ -3923,6 +3919,13 @@
     <Content Include="Assets\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="Assets\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Assets\ckeditor\skins\moono-lisa\readme.md" />
+    <EntityDeploy Include="Models\ReviewFoodModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ReviewFoodModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ReviewFoodModel.edmx.diagram">
+      <DependentUpon>ReviewFoodModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -12,6 +12,7 @@
           <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
           <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
           <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -28,6 +29,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DanhMucChas">
+      <EntityTypeMapping TypeName="db_WebReviewFoodModel.DanhMucCha">
+        <MappingFragment StoreEntitySet="DanhMucCha">
+          <ScalarProperty Name="MaDMCha" ColumnName="MaDMCha" />
+          <ScalarProperty Name="TenDM" ColumnName="TenDM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="DanhMucs">
       <EntityTypeMapping TypeName="db_WebReviewFoodModel.DanhMuc">
         <MappingFragment StoreEntitySet="DanhMucs">
@@ -35,6 +44,7 @@
           <ScalarProperty Name="TenDanhMuc" ColumnName="TenDanhMuc" />
           <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
           <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
+          <ScalarProperty Name="IdDanhMucCha" ColumnName="IdDanhMucCha" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

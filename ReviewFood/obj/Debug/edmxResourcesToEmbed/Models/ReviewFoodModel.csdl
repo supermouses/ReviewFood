@@ -12,8 +12,11 @@
     <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="TrangThai" Type="Boolean" Nullable="false" />
+    <Property Name="IdTaiKhoan" Type="Int32" />
+    <NavigationProperty Name="DanhMuc" Relationship="Self.FK_BaiViet_DanhMucs" FromRole="BaiViet" ToRole="DanhMucs" />
+    <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_BaiViet_TaiKhoans" FromRole="BaiViet" ToRole="TaiKhoans" />
     <NavigationProperty Name="DanhGias" Relationship="Self.FK_DanhGia_TinTuc" FromRole="BaiViet" ToRole="DanhGias" />
-    <NavigationProperty Name="DanhMuc" Relationship="Self.FK_TinTuc_DanhMuc" FromRole="BaiViet" ToRole="DanhMucs" />
+    <NavigationProperty Name="DanhMuc1" Relationship="Self.FK_TinTuc_DanhMuc" FromRole="BaiViet" ToRole="DanhMucs" />
   </EntityType>
   <EntityType Name="DanhGia">
     <Key>
@@ -29,6 +32,14 @@
     <NavigationProperty Name="BaiViet" Relationship="Self.FK_DanhGia_TinTuc" FromRole="DanhGias" ToRole="BaiViet" />
     <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_DanhGia_TaiKhoan" FromRole="DanhGias" ToRole="TaiKhoans" />
   </EntityType>
+  <EntityType Name="DanhMucCha">
+    <Key>
+      <PropertyRef Name="MaDMCha" />
+    </Key>
+    <Property Name="MaDMCha" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenDM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="DanhMucs" Relationship="Self.FK_DoanhMuc_DoanhMucCha" FromRole="DanhMucCha" ToRole="DanhMucs" />
+  </EntityType>
   <EntityType Name="DanhMuc">
     <Key>
       <PropertyRef Name="Id" />
@@ -37,7 +48,10 @@
     <Property Name="TenDanhMuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="NgaySua" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="BaiViets" Relationship="Self.FK_TinTuc_DanhMuc" FromRole="DanhMucs" ToRole="BaiViet" />
+    <Property Name="IdDanhMucCha" Type="Int32" />
+    <NavigationProperty Name="BaiViets" Relationship="Self.FK_BaiViet_DanhMucs" FromRole="DanhMucs" ToRole="BaiViet" />
+    <NavigationProperty Name="BaiViets1" Relationship="Self.FK_TinTuc_DanhMuc" FromRole="DanhMucs" ToRole="BaiViet" />
+    <NavigationProperty Name="DanhMucCha" Relationship="Self.FK_DoanhMuc_DoanhMucCha" FromRole="DanhMucs" ToRole="DanhMucCha" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -63,8 +77,33 @@
     <Property Name="TrangThai" Type="Boolean" />
     <Property Name="Quyen" Type="Boolean" Nullable="false" />
     <Property Name="NgaySinh" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="BaiViets" Relationship="Self.FK_BaiViet_TaiKhoans" FromRole="TaiKhoans" ToRole="BaiViet" />
     <NavigationProperty Name="DanhGias" Relationship="Self.FK_DanhGia_TaiKhoan" FromRole="TaiKhoans" ToRole="DanhGias" />
   </EntityType>
+  <Association Name="FK_BaiViet_DanhMucs">
+    <End Role="DanhMucs" Type="Self.DanhMuc" Multiplicity="1" />
+    <End Role="BaiViet" Type="Self.BaiViet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DanhMucs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BaiViet">
+        <PropertyRef Name="IdDanhMuc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BaiViet_TaiKhoans">
+    <End Role="TaiKhoans" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="BaiViet" Type="Self.BaiViet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoans">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BaiViet">
+        <PropertyRef Name="IdTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DanhGia_TinTuc">
     <End Role="BaiViet" Type="Self.BaiViet" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -107,12 +146,33 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DoanhMuc_DoanhMucCha">
+    <End Role="DanhMucCha" Type="Self.DanhMucCha" Multiplicity="0..1" />
+    <End Role="DanhMucs" Type="Self.DanhMuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DanhMucCha">
+        <PropertyRef Name="MaDMCha" />
+      </Principal>
+      <Dependent Role="DanhMucs">
+        <PropertyRef Name="IdDanhMucCha" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="db_WebReviewFoodEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="BaiViets" EntityType="Self.BaiViet" />
     <EntitySet Name="DanhGias" EntityType="Self.DanhGia" />
+    <EntitySet Name="DanhMucChas" EntityType="Self.DanhMucCha" />
     <EntitySet Name="DanhMucs" EntityType="Self.DanhMuc" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
+    <AssociationSet Name="FK_BaiViet_DanhMucs" Association="Self.FK_BaiViet_DanhMucs">
+      <End Role="DanhMucs" EntitySet="DanhMucs" />
+      <End Role="BaiViet" EntitySet="BaiViets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BaiViet_TaiKhoans" Association="Self.FK_BaiViet_TaiKhoans">
+      <End Role="TaiKhoans" EntitySet="TaiKhoans" />
+      <End Role="BaiViet" EntitySet="BaiViets" />
+    </AssociationSet>
     <AssociationSet Name="FK_DanhGia_TinTuc" Association="Self.FK_DanhGia_TinTuc">
       <End Role="BaiViet" EntitySet="BaiViets" />
       <End Role="DanhGias" EntitySet="DanhGias" />
@@ -124,6 +184,10 @@
     <AssociationSet Name="FK_DanhGia_TaiKhoan" Association="Self.FK_DanhGia_TaiKhoan">
       <End Role="TaiKhoans" EntitySet="TaiKhoans" />
       <End Role="DanhGias" EntitySet="DanhGias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DoanhMuc_DoanhMucCha" Association="Self.FK_DoanhMuc_DoanhMucCha">
+      <End Role="DanhMucCha" EntitySet="DanhMucChas" />
+      <End Role="DanhMucs" EntitySet="DanhMucs" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

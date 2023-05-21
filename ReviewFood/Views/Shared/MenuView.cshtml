@@ -1,19 +1,83 @@
 ﻿@model IEnumerable<ReviewFood.Models.DanhMuc>
+
+<style>
+
+
+    li a, .dropbtn {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 0px 1px;
+        text-decoration: none;
+    }
+
+        li a:hover, .dropdown:hover .dropbtn {
+            background-color: #FFFFFF;
+        }
+
+    li.dropdown {
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #f1f1f1;
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
+
 <nav class="header__nav-wrap">
 
     <h2 class="header__nav-heading h1">Navigate to</h2>
     <ul class="header__nav">
-        <li class="current"><a href="/" title="">Home</a></li>
+        <li class="current" style=" width: 135px; "><a href="/" title="">Home</a></li>
         @foreach (var item in Model)
         {
-            <li>
-                <a href="/DanhMuc/Index/@item.Id" title="">@item.TenDanhMuc</a>
-            </li>
+            if (item.IdDanhMucCha == 1)
+            {
+                <li class="dropdown" style="width: 200px; ">
+                    <a href="/DanhMuc/Index/@item.Id" class="dropbtn">@item.DanhMucCha.TenDM</a>
+                    <div class="dropdown-content" style="width:170px">
+                        <a href="/BaiViet/Index/@item.Id">Hải sản</a>
+                        <a href="#">Món lẩu</a>
+                        <a href="#">Món chay</a>
+                    </div>
+                </li>
+            }
+            else if (item.IdDanhMucCha == 2)
+            {
+                <li class="dropdown" style="width: 250px; ">
+                    <a href="/DanhMuc/Index/@item.Id" class="dropbtn">@item.DanhMucCha.TenDM</a>
+                    <div class="dropdown-content" style="width:220px">
+                        <a href="">Ẩm thực miền Bắc</a>
+                        <a href="#">Ẩm thực miền Trung</a>
+                        <a href="#">Ẩm thực miền Nam</a>
+                    </div>
+                </li>
+            }
         }
         @if (Session["TaiKhoan"] == null)
         {
-            <li><a href="/TaiKhoan/Login" title="">Đăng nhập</a></li>
-            <li><a href="/TaiKhoan/Create" title="">Đăng ký</a></li>
+            <li class="current" style=" width: 135px; "><a href="/TaiKhoan/Login" title="">Đăng nhập</a></li>
+            <li class="current" style=" width: 135px; "><a href="/TaiKhoan/Create" title="">Đăng ký</a></li>
         }
         else
         {
@@ -44,22 +108,27 @@
                 }
                 else
                 {
-                    <li class="dropdown">
-                        <a href="/TaiKhoan/Detail/@data.Split(',')[2]"
-                           class="dropdown-toggle"
-                           data-toggle="dropdown"
-                           role="button"
-                           aria-haspopup="true"
-                           aria-expanded="false">
-                            Xin chào
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="btn-outline-success"><a href="/TaiKhoan/Edit/@data.Split(',')[2]">Edit</a></li>
-                            <li class="btn-outline-success"><a href="/BaiViet/Create/@data.Split(',')[2]">Tạo Post</a></li>
-                            <li class="btn-outline-success"><a href="/TaiKhoan/Logout">Đăng Xuất</a></li>
-                        </ul>
-                    </li>
+                    string userData = Session["TaiKhoan"].ToString();
+                    if (userData != null)
+                    {
+                        string userName = userData.Split(',')[1];
+                        <li class="dropdown-list-toggle">
+                            <a href="/TaiKhoan/Detail/@userData.Split(',')[2]"
+                               class="dropdown-toggle"
+                               data-toggle="dropdown"
+                               role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                Xin chào @userName
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-list-content">
+                                <li class="btn--primary"><a href="/TaiKhoan/Edit/@userData.Split(',')[2]">Edit</a></li>
+                                <li class="btn--primary"><a href="/BaiViet/Create/@userData.Split(',')[2]">Tạo Post</a></li>
+                                <li class="btn--primary"><a href="/TaiKhoan/Logout">Đăng Xuất</a></li>
+                            </ul>
+                        </li>
+                    }
                 }
             }
         }
