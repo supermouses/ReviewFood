@@ -76,8 +76,8 @@
         }
         @if (Session["TaiKhoan"] == null)
         {
-            <li class="current" style=" width: 135px; "><a href="/TaiKhoan/Login" title="">Đăng nhập</a></li>
-            <li class="current" style=" width: 135px; "><a href="/TaiKhoan/Create" title="">Đăng ký</a></li>
+            <li><a href="/TaiKhoan/Login" title="">Đăng nhập</a></li>
+            <li><a href="/TaiKhoan/Create" title="">Đăng ký</a></li>
         }
         else
         {
@@ -112,7 +112,7 @@
                     if (userData != null)
                     {
                         string userName = userData.Split(',')[1];
-                        <li class="dropdown-list-toggle">
+                        <li class="dropdown">
                             <a href="/TaiKhoan/Detail/@userData.Split(',')[2]"
                                class="dropdown-toggle"
                                data-toggle="dropdown"
@@ -122,10 +122,10 @@
                                 Xin chào @userName
                                 <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-list-content">
-                                <li class="btn--primary"><a href="/TaiKhoan/Edit/@userData.Split(',')[2]">Edit</a></li>
-                                <li class="btn--primary"><a href="/BaiViet/Create/@userData.Split(',')[2]">Tạo Post</a></li>
-                                <li class="btn--primary"><a href="/TaiKhoan/Logout">Đăng Xuất</a></li>
+                            <ul class="dropdown-menu">
+                                <li class="btn-outline-success"><a href="/TaiKhoan/Edit/@userData.Split(',')[2]">Edit</a></li>
+                                <li class="btn-outline-success"><a href="/BaiViet/Create/@userData.Split(',')[2]">Tạo Post</a></li>
+                                <li class="btn-outline-success"><a href="/TaiKhoan/Logout">Đăng Xuất</a></li>
                             </ul>
                         </li>
                     }

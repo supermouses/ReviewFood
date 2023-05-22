@@ -23,6 +23,7 @@ namespace ReviewFood.Controllers
             var TinTucs = (from tt in db.BaiViets
                            join dm in db.DanhMucs on tt.IdDanhMuc equals dm.Id
                            orderby tt.Id descending
+                           where tt.TrangThai == true
                            where tt.IdDanhMuc == id
                            select new BaiViet_DanhMuc
                            {

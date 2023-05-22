@@ -1,99 +1,101 @@
 ﻿@model ReviewFood.Models.BaiViet
+
 <section class="s-content s-content--top-padding s-content--narrow">
+    <div class="row">
+        <div class="column left" style="width: 70%; float: left; padding-right: 2%;">
+            <article class="row entry format-standard">
 
-    <article class="row entry format-standard">
+                <div class="entry__media col-full">
+                    <div class="entry__post-thumb">
+                        <img src="/Assets/Image/@Model.HinhAnh"
+                             srcset="/Assets/Image/@Model.HinhAnh"
+                             sizes="(max-width: 200px) 10vw, 20px" alt="hinh anhhhhhhhhh">
+                    </div>
+                </div>
+                <div class="entry__header col-full">
+                    <h1 class="entry__header-title display-1">
+                        @Model.TieuDe
+                    </h1>
+                    <ul class="entry__header-meta">
+                        <li class="date">@Model.NgayTao</li>
+                    </ul>
+                </div>
+            </article> <!-- end entry/article -->
 
-        <div class="entry__media col-full">
-            <div class="entry__post-thumb">
-                <img src="/Assets/Image/@Model.HinhAnh"
-                     srcset="/Assets/Image/@Model.HinhAnh"
-                     sizes="(max-width: 2000px) 100vw, 2000px" alt="">
-            </div>
-        </div>
+            <div class="col-full entry__main">
+                <div class="row s-content__nav img-reponsive" style="height:100%;width:100%">
+                    @Html.Raw(Model.NoiDung)
+                </div>
+            </div> <!-- end s-content__pagenav -->
 
-        <div class="entry__header col-full">
-            <h1 class="entry__header-title display-1">
-                @Model.TieuDe
-            </h1>
-            <ul class="entry__header-meta">
-                <li class="date">@Model.NgayTao</li>
-            </ul>
-        </div>
-
-    </article> <!-- end entry/article -->
+        </div>  <!--end column left-->
 
 
-    <div class="col-full entry__main">
-        <div class="row s-content__nav">
-            @Html.Raw(Model.NoiDung)
-        </div>
-    </div> <!-- end s-content__pagenav -->
+        <div class="column right" style="width: 30%; float: right; position:sticky;  top: 100px; bottom:0;">
+            <div class="comments-wrap">
+                <div class="row comment-respond">
 
-    <div class="comments-wrap">
+                    <!-- START respond -->
+                    <div id="respond" class="col-full">
+                        <h3 class="h2">Thêm bình luận</h3>
 
-        <div id="comments" class="row">
-            <div class="col-full">
-                <!-- START commentlist -->
-                <ol class="commentlist">
-                    @foreach (var item in ViewBag.Comments)
-                    {
-                        <li class="depth-1 comment">
-                            <div class="comment__content">
+                        <form name="contactForm" id="contactForm" method="post" action="/DanhGia/Create" autocomplete="off">
+                            <fieldset>
+                                <div class="message form-field">
+                                    <input type="hidden" name="MaTinTuc" value="@Model.Id" hidden />
+                                    <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Nơi bình luận" required></textarea>
+                                    <input name="submit" id="submit" class="btn btn--primary btn-wide full-width" value="Thêm bình luận" type="submit">
+                                </div>
 
-                                <div class="comment__info">
-                                    <div class="comment__author">@item.TaiKhoan</div>
+                            </fieldset>
+                        </form> <!-- end form -->
 
-                                    <div class="comment__meta">
-                                        <div class="comment__time">@item.NgayTao</div>
-                                        <div class="comment__reply">
+                    </div>
+                    <!-- END respond-->
+
+                </div> <!-- end comment-respond -->
+
+                <div id="comments" class="row">
+                    <div class="col-full">
+
+                        <!-- START commentlist -->
+                        <ol class="commentlist">
+                            @foreach (var item in ViewBag.Comments)
+                            {
+                                <li class="depth-1 comment">
+                                    <div class="comment__content">
+
+                                        <div class="comment__info">
+                                            <div class="comment__author">@item.TaiKhoan</div>
+
+                                            <div class="comment__meta">
+                                                <div class="comment__time">@item.NgayTao</div>
+                                                <div class="comment__reply">
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div class="comment__text">
+                                            <p>
+                                                @item.NoiDung
+                                            </p>
+                                        </div>
+
                                     </div>
-                                </div>
 
-                                <div class="comment__text">
-                                    <p>
-                                        @item.NoiDung
-                                    </p>
-                                </div>
+                                </li><!-- end comment level 1 -->
+                            }
+                        </ol>
+                        <!-- END commentlist -->
 
-                            </div>
+                    </div> <!-- end col-full -->
 
-                        </li><!-- end comment level 1 -->
-                    }
+                </div> <!-- end comments -->
 
+            </div> <!-- end comments-wrap -->
 
-                </ol>
-                <!-- END commentlist -->
+        </div>  <!--end column right-->
 
-            </div> <!-- end col-full -->
-        </div> <!-- end comments -->
-
-        <div class="row comment-respond">
-
-            <!-- START respond -->
-            <div id="respond" class="col-full">
-
-                <h3 class="h2">Thêm bình luận</h3>
-
-                <form name="contactForm" id="contactForm" method="post" action="/DanhGia/Create" autocomplete="off">
-                    <fieldset>
-                        <div class="message form-field">
-                            <input type="hidden" name="MaTinTuc" value="@Model.Id" hidden />
-                            <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Nơi bình luận" required></textarea>
-                        </div>
-
-                        <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Thêm bình luận" type="submit">
-
-                    </fieldset>
-                </form> <!-- end form -->
-
-            </div>
-            <!-- END respond-->
-
-        </div> <!-- end comment-respond -->
-
-    </div> <!-- end comments-wrap -->
-
+    </div>
 </section>
 @section Scripts
 {

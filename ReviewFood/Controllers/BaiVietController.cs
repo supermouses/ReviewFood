@@ -111,6 +111,7 @@ namespace ReviewFood.Controllers
                     }
                 }
                 baiViet.TrangThai = false;
+                //baiViet.IdTaiKhoan = db.BaiViets.Max(p => p.IdTaiKhoan) + 1;
                 baiViet.NgayTao = DateTime.Now;
                 baiViet.NgaySua = DateTime.Now;
                 db.BaiViets.Add(baiViet);

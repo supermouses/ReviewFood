@@ -1604,8 +1604,8 @@ input[type="button"] {
     }
 
     .entries .item-entry__title {
-        font-family: "Libre Baskerville", serif;
-        font-size: 2.8rem;
+        font-family: "Libre Baskerville", sans-serif;
+        font-size: 2.3rem;
         line-height: 1.286;
         margin-top: 0;
         margin-bottom: 4.5rem;
@@ -2498,9 +2498,8 @@ body.search-is-visible {
             color: #FFFFFF;
             border-bottom: 1px solid transparent;
             -webkit-transition: all 0.5s ease-in-out;
-            transition: all 0.3s ease-in-out;
-            -webkit-text-stroke-width: 1px;
-            -webkit-text-stroke-color: black;
+            transition: all 0.5s ease-in-out;
+            -webkit-text-stroke: 1px black;
         }
 
             .featured__slide h1 a:focus, .featured__slide h1 a:hover {
@@ -2796,7 +2795,7 @@ body.search-is-visible {
  *
  * ------------------------------------------------------------------- */
 .s-content {
-    background-color: #f2f2f2;
+    background-color: #f2f2f5;
     padding-top: 6rem;
     padding-bottom: 7.2rem;
 }
