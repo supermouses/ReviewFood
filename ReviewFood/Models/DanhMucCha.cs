@@ -17,12 +17,15 @@ namespace ReviewFood.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DanhMucCha()
         {
+            this.BaiViets = new HashSet<BaiViet>();
             this.DanhMucs = new HashSet<DanhMuc>();
         }
     
         public int MaDMCha { get; set; }
         public string TenDM { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BaiViet> BaiViets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanhMuc> DanhMucs { get; set; }
     }

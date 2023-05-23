@@ -29,7 +29,9 @@ namespace ReviewFood.Models
         public System.DateTime NgaySua { get; set; }
         public bool TrangThai { get; set; }
         public Nullable<int> IdTaiKhoan { get; set; }
+        public Nullable<int> IdDMCha { get; set; }
     
+        public virtual DanhMucCha DanhMucCha { get; set; }
         public virtual DanhMuc DanhMuc { get; set; }
         public virtual TaiKhoan TaiKhoan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
