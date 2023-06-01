@@ -1,4 +1,5 @@
-﻿using ReviewFood.Models;
+﻿using Microsoft.Ajax.Utilities;
+using ReviewFood.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,13 @@ namespace ReviewFood.Areas.Admin.Controllers
         // GET: Admin/Home
         public ActionResult Index()
         {
+            int TongDanhMucCha = db.DanhMucChas.Count();
             int TongDanhMuc = db.DanhMucs.Count();
             int TongTinTuc = db.BaiViets.Count();
-            int TongTaiKhoan = db.TaiKhoans.Count();
-            int[] data = new int[] { TongDanhMuc, TongTinTuc, TongTaiKhoan };
+            int TongTinChuaDuyet = db.BaiViets.Where(tt => tt.TrangThai == false).Count();
+            int TaiKhoanChuaDuyet = db.TaiKhoans.Where(ttk => ttk.TrangThai == false).Count();
+            int TongTaiKhoan = db.TaiKhoans.Count();  
+            int[] data = new int[] { TongDanhMucCha, TongDanhMuc, TongTinTuc, TongTaiKhoan, TongTinChuaDuyet, TaiKhoanChuaDuyet };
             ViewBag.Data = data;
             return View();
         }

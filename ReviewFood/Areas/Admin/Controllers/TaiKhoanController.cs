@@ -136,6 +136,44 @@ namespace ReviewFood.Areas.Admin.Controllers
             }
             return RedirectToAction("Index", "TaiKhoan");
         }
+        public ActionResult ChuaDuyetTK()
+        {
+
+            return View(db.TaiKhoans.Where(tt => tt.TrangThai == false).ToList());
+        }
+        public ActionResult EditChuaDuyet(int id)
+        {
+            var data = db.TaiKhoans.Find(id);
+            if (data == null)
+            {
+                return RedirectToAction("Index", "TaiKhoan");
+            }
+            return View(data);
+        }
+
+        // POST: Admin/TaiKhoan/Edit/5
+        [HttpPost]
+        public ActionResult EditChuaDuyet(TaiKhoan taiKhoans)
+        {
+            try
+            {
+                var tk = db.TaiKhoans.Find(taiKhoans.Id);
+                tk.HoTen = taiKhoans.HoTen;
+                tk.GioiTinh = taiKhoans.GioiTinh;
+                tk.Email = taiKhoans.Email;
+                tk.DiaChi = taiKhoans.DiaChi;
+                tk.TrangThai = taiKhoans.TrangThai;
+                tk.Quyen = taiKhoans.Quyen;
+                tk.NgaySinh = taiKhoans.NgaySinh;
+                db.SaveChanges();
+                ViewBag.Done = "Sửa tài khoản thành công";
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+            }
+            return View(taiKhoans);
+        }
         public ActionResult Logout()
         {
             Session.Remove("TaiKhoan");

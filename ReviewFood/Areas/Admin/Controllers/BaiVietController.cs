@@ -50,6 +50,7 @@ namespace ReviewFood.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.DanhMucs = db.DanhMucs.ToList();
+            ViewBag.DanhMucChas = db.DanhMucChas.ToList();
             return View();
         }
 
@@ -105,6 +106,7 @@ namespace ReviewFood.Areas.Admin.Controllers
                 ViewBag.Error = ex.Message;
             }
             ViewBag.DanhMucs = db.DanhMucs.ToList();
+            ViewBag.DanhMucChas = db.DanhMucChas.ToList(); ///
             return View(baiViet);
         }
 
@@ -208,7 +210,87 @@ namespace ReviewFood.Areas.Admin.Controllers
             }
             return RedirectToAction("Index", "BaiViet");
         }
+        public ActionResult TinChuaDuyet(string IdDanhMuc, string keyword)
+        {
+            int idDM = 0;
+            if (IdDanhMuc != null) idDM = int.Parse(IdDanhMuc);
+            ViewBag.keyword = keyword;
+            if (IdDanhMuc != null)
+                ViewBag.IdDanhMuc = int.Parse(IdDanhMuc);
+            else ViewBag.IdDanhMuc = IdDanhMuc;
+            ViewBag.DanhMucs = db.DanhMucs.ToList();
+            List<BaiViet> baiViets = new List<BaiViet>();
+            if (idDM == 0 && keyword == "" || idDM == 0 && keyword == null)
+                baiViets = db.BaiViets.Where(tt => tt.TrangThai == false).ToList();
+            else if (idDM != 0 && keyword == "")
+                baiViets = db.BaiViets.Where(dm => dm.IdDanhMuc.Equals(idDM) && dm.IdDanhMuc.Equals(idDM) && dm.TrangThai == false).ToList();
+            else if (idDM == 0 && keyword != "")
+                baiViets = db.BaiViets.Where(dm => dm.TieuDe.Contains(keyword) && dm.IdDanhMuc.Equals(idDM) && dm.TrangThai == false).ToList();
+            else
+                //baiViets = db.BaiViets.Where(dm => dm.TieuDe.Contains(keyword) && dm.IdDanhMuc.Equals(idDM)).ToList();
+                baiViets = db.BaiViets.Where(dm => dm.TieuDe.Contains(keyword) && dm.IdDanhMuc.Equals(idDM) && dm.TrangThai == false).ToList();
+            if (TempData["Done"] != null || TempData["Error"] != null)
+            {
+                ViewBag.Done = TempData["Done"];
+                ViewBag.Error = TempData["Error"];
+                TempData.Remove("Done");
+                TempData.Remove("Error");
+            }
+            return View(baiViets);
+        }
+        //[HttpPost]
+        //[ValidateInput(false)]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult TinChuaDuyet(BaiViet tinTucs)
+        //{
+        //    var query = (from tt in db.BaiViets
+        //                 where tt.Id == tinTucs.Id
+        //                 select tt).Take(1);
+        //    foreach (BaiViet tt in query)
+        //    {
+        //        tt.TrangThai = tinTucs.TrangThai;
+        //    };
+        //    db.SaveChanges();
+        //    ViewBag.Done = "Sửa trạng thái thành công";
+        //    ViewBag.DanhMucs = db.DanhMucs.ToList();
+        //    return View(tinTucs);
+        //}
+        public ActionResult EditDuyetBai(int id)
+        {
+            var data = db.BaiViets.Find(id);
+            if (data == null)
+            {
+                return RedirectToAction("Index", "BaiViet");
+            }
+            ViewBag.DanhMucs = db.DanhMucs.ToList();
+            return View(data);
+        }
 
+        // POST: Admin/TinTuc/Edit/5
+        [HttpPost]
+        [ValidateInput(false)]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditDuyetBai(BaiViet tinTucs, HttpPostedFileBase img)
+        {
+            var query = (from tt in db.BaiViets
+                         where tt.Id == tinTucs.Id
+                         select tt).Take(1);
+            foreach (BaiViet tt in query)
+            {
+                tt.TieuDe = tinTucs.TieuDe;
+                tt.NoiDung = tinTucs.NoiDung;
+                if (tinTucs.HinhAnh != null)
+                    tt.HinhAnh = tinTucs.HinhAnh;
+                else tinTucs.HinhAnh = tt.HinhAnh;
+                tt.IdDanhMuc = tinTucs.IdDanhMuc;
+                tt.NgaySua = DateTime.Now;
+                tt.TrangThai = tinTucs.TrangThai;
+            };
+            db.SaveChanges();
+            ViewBag.Done = "Sửa Trạng Thái thành công";
+            ViewBag.DanhMucs = db.DanhMucs.ToList();
+            return View(tinTucs);
+        }
         public bool extensionFile(string extension)
         {
             var st_Exten = extension.ToLower();

@@ -64,7 +64,7 @@ namespace ReviewFood.Controllers
         [ChildActionOnly]
         public ActionResult MenuView()
         {
-            var menu = db.DanhMucs.ToList();
+            var menu = db.DanhMucChas.ToList();
             return PartialView(menu);
         }
     }

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ReviewFood.Models.BaiViet>
+
+@{
+    ViewBag.Title = "Tin Chưa Duyệt";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<h1 class="section-header">
+    Tin Chưa Duyệt
+</h1>
+
+
+<form method="get" asp-controller="BaiViet" asp-action="Index" class="p-4">
+    <div class="row">
+        <div class="col-4">
+            <select name="IdDanhMuc" class="form-control" value="@ViewBag.IdDanhMuc">
+                <option value="0" @if (ViewBag.IdDanhMuc == 0) { <text> selected="selected" </text> }>Tất cả</option>
+                @foreach (var item in ViewBag.DanhMucs)
+                {
+                    <option value="@item.Id" @if (ViewBag.IdDanhMuc == item.Id) { <text> selected="selected" </text> }>@item.TenDanhMuc</option>
+                }
+            </select>
+        </div>
+        <div class="col-5">
+            <input type="text" name="keyword" value="@ViewBag.keyword" class="form-control" placeholder="Search" aria-label="Search" />
+        </div>
+        <div class="col-2">
+            <input type="submit" name="Search" value="Submit" class="btn btn-secondary" />
+        </div>
+    </div>
+</form>
+
+<table class="table table-striped" border="1">
+    <thead class=" table-success ">
+        <tr>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.TieuDe)*@ Tiêu Đề
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.NgayTao)*@ Ngày Tạo
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.TrangThai)*@ Trạng Thái
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TieuDe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayTao)
+            </td>
+            <td>
+                @if (item.TrangThai == false)
+                {
+                    <p>Chưa Duyệt</p>
+                }
+                else
+                {
+                    <p>Đã Duyệt</p>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditDuyetBai", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+@section Scripts
+{
+    @{
+        var message_done = ViewBag.Done;
+        var message_err = ViewBag.Error;
+    }
+    <script>
+        var message_done = '@Html.Raw(message_done)';
+        var message_err = '@Html.Raw(message_err)';
+        console.log(message_done)
+        if (message_done != "" && message_done != null) {
+            toastr.success(message_done, 'Thành công!');
+        } else if (message_err != "" && message_err != null) {
+            toastr.error(message_err, 'Lỗi!');
+        }
+    </script>
+}

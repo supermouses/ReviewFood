@@ -1,66 +1,108 @@
-﻿
-<section class="s-content s-content--top-padding s-content--narrow">
-
-    <article class="row entry format-standard">
-
-        <div class="entry__media col-full">
-            <div class="card card-primary content">
-                <div class="row">
-
-                    <!-- START respond -->
-                    <div id="respond" class="col-full">
-                        <h3 class="h2">Đăng ký</h3>
-                        <form name="contactForm" id="contactForm" method="post" action="/TaiKhoan/Create" autocomplete="off">
-                            <fieldset>
-
-                                <div class="form-field">
-                                   Tên Đăng Nhập <input name="TenDangNhap" id="cName" class="full-width" placeholder="Mời nhập tên tài khoản*" value="" type="text" required>
-                                </div>
-
-                                <div class="form-field">
-                                    Họ Tên<input name="HoTen" id="cName" class="full-width" placeholder="Họ và Tên của bạn" value="" type="text" required>
-                                </div>
-
-                                <div class="form-field">
-                                   Mật Khẩu <input name="MatKhau" class="full-width" placeholder="*" value="" type="password" required>
-                                </div>
-
-                                <div class="form-field">
-                                    Giới tính:  <input type="radio" name="GioiTinh" value="true" checked /> Nam
-                                    <input type="radio" name="GioiTinh" value="false" /> Nữ
-                                </div>
-
-                                <div class="form-field">
-                                    Email <input name="Email" id="cName" class="full-width" placeholder="Vui lòng điền chính xác Email của bạn*" value="" type="email" required>
-                                </div>
-
-                                <div class="form-field">
-                                   Địa Chỉ <input name="DiaChi" id="cName" class="full-width" placeholder="*" value="" type="text" required>
-                                </div>
-                                <div class="form-field">
-                                    Ngày Sinh<input name="NgaySinh" id="cName" class="full-width" placeholder="*" value="" type="date" required>
-                                </div>
-
-                                <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Create" type="submit">
-
-                            </fieldset>
-                        </form> <!-- end form -->
-
-                    </div>
-                    <!-- END respond-->
-
-                </div>
+﻿<div class="wrapper">
+    <div class="title-text">
+        <div class="title login">Signup Form</div>
+    </div>
+    <div class="form-inner">
+        <form name="contactForm" id="contactForm" method="post" action="/TaiKhoan/Create" autocomplete="off">
+            <div class="field">
+                <input name="TenDangNhap" id="cName" class="full-width" placeholder="Mời nhập tên tài khoản*" value="" type="text" required>
             </div>
-        </div>
-    </article>
-</section>
-@section Scripts
-{
-    @{
+            <div class="field">
+                <input name="HoTen" id="cName" class="full-width" placeholder="Họ và Tên của bạn" value="" type="text" required>
+            </div>
+            <div class="field">
+                <input name="MatKhau" class="full-width" placeholder="Mat Khau" value="" type="password" required>
+            </div>
+
+            <div class="gender">
+
+                Nam <input type="radio" name="GioiTinh" value="true" checked>
+
+                Nữ <input type="radio" name="GioiTinh" value="false">
+            </div>
+
+            <div class="field">
+                <input name="Email" id="cName" class="full-width" placeholder="Vui lòng điền chính xác Email của bạn*" value="" type="email" required>
+            </div>
+
+            <div class="field">
+                <input name="DiaChi" id="cName" class="full-width" placeholder="Địa Chỉ " value="" type="text" required>
+            </div>
+            <div class="field">
+                <input name="NgaySinh" id="cName" class="full-width" placeholder="Ngày Sinh" value="" type="date" required>
+            </div>
+            <br />
+            <a href="/TaiKhoan/Login">Đã có tài khoản ? Đăng nhập ngay</a>
+            <br />
+            <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Create" type="submit" href="/TaiKhoan/Create">
+        </form>
+    </div>
+</div>
+
+
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    html, body {
+        display: grid;
+        height: 100%;
+        width: 100%;
+        place-items: center;
+        background: -webkit-linear-gradient(left, #003366,#004080,#0059b3, #0073e6);
+    }
+
+    ::selection {
+        background: #1a75ff;
+        color: #fff;
+    }
+
+    .wrapper {
+        margin-bottom: 20px;
+        margin-top: 100px;
+        overflow: hidden;
+        max-width: 390px;
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+        width: 200%;
+    }
+
+
+        .wrapper .title-text {
+            display: flex;
+            width: 200%;
+        }
+
+        .wrapper .title {
+            width: 50%;
+            font-size: 35px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+        }
+
+        .wrapper .slide-controls {
+            position: relative;
+            display: flex;
+            height: 50px;
+            width: 100%;
+            overflow: hidden;
+            margin: 30px 0 10px 0;
+        }
+</style>
+
+<script>
+            @{
         var message_done = ViewBag.Done;
         var message_err = ViewBag.Error;
     }
-    <script>
     var message_done = '@Html.Raw(message_done)';
     var message_err = '@Html.Raw(message_err)';
     console.log(message_done)
@@ -69,6 +111,4 @@
     } else if (message_err != "" && message_err != null) {
         toastr.error(message_err, 'Lỗi!');
     }
-    </script>
-}
-
+</script>

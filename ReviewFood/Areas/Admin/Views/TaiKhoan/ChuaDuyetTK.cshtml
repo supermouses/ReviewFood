@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ReviewFood.Models.TaiKhoan>
+@{
+    ViewData["Title"] = "Index tài khoản";
+    ViewData["TitleHeader"] = "Danh sách tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<table class="table table-striped" border="1">
+    <thead class=" table-success ">
+        <tr>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.HoTen)*@
+                Họ Tên
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.GioiTinh)*@
+                Giới tính
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.DiaChi)*@
+                Địa Chỉ
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.TrangThai)*@
+                Trạng Thái
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Quyen)*@
+                Quyền
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.NgaySinh)*@
+                Ngày Sinh
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTen)
+            </td>
+            <td>
+                @if (item.TrangThai == true)
+                {
+                    <p>Nam</p>
+                }
+                else
+                {
+                    <p>Nữ</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @if (item.TrangThai == true)
+                {
+                    <p>Kích hoạt</p>
+                }
+                else
+                {
+                    <p>Vô hiệu</p>
+                }
+            </td>
+            <td>
+                @if (item.Quyen == true)
+                {
+                    <p>Admin</p>
+                }
+                else
+                {
+                    <p>Người dùng</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgaySinh)
+            </td>
+            <td>
+                @Html.ActionLink("Chi Tiết", "EditChuaDuyet", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

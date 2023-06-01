@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ReviewFood.Models.DanhMucCha>
+@{
+    ViewData["Title"] = "Index Danh mục";
+    ViewData["TitleHeader"] = "Danh sách Danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<h2>Danh Mục Cha</h2>
+
+<table class="table table-striped" border="1">
+    <thead class=" table-success ">
+        <tr>
+            <th scope="col">
+                Tên Danh Mục Cha
+            </th>
+            <th>
+                Chức Năng
+            </th>
+        </tr>
+    </thead>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDM)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MaDMCha }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MaDMCha })
+            </td>
+        </tr>
+    }
+
+</table>
+@section Scripts
+{
+    @{
+        var message_done = ViewBag.Done;
+        var message_err = ViewBag.Error;
+    }
+    <script>
+        var message_done = '@Html.Raw(message_done)';
+        var message_err = '@Html.Raw(message_err)';
+        console.log(message_done)
+        if (message_done != "" && message_done != null) {
+            toastr.success(message_done, 'Thành công!');
+        } else if (message_err != "" && message_err != null) {
+            toastr.error(message_err, 'Lỗi!');
+        }
+    </script>
+}
