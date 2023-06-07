@@ -31,6 +31,8 @@ namespace ReviewFood.Controllers
                            where dmc.MaDMCha == id
                            select new BaiViet_DanhMucCha
                            {
+                               
+                               NoiDung = tt.NoiDung,
                                MaDMCha = dmc.MaDMCha,
                                DanhMuc = dm.TenDanhMuc,
                                MaDanhMuc = dm.Id,

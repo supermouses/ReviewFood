@@ -14,9 +14,9 @@ namespace ReviewFood.Areas.Admin.Controllers
         public ActionResult Index(int id)
         {
             object data = (from cmt in db.DanhGias
-                           join tt in db.BaiViets on cmt.Id equals tt.Id
+                           join tt in db.BaiViets on cmt.IdTinTuc equals tt.Id
                            join tk in db.TaiKhoans on cmt.IdTaiKhoan equals tk.Id
-                           where cmt.Id == id
+                           where cmt.IdTinTuc == id
                            select new DanhGia_BaiViet
                            {
                                Id = cmt.Id,
