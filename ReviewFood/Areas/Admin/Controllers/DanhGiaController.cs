@@ -39,12 +39,14 @@ namespace ReviewFood.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id, DanhGia danhGias)
         {
-            var data = db.DanhMucs.Find(id);
-            if (data == null)
+            var danhGia = db.DanhGias.Find(id);
+            if (danhGia == null)
             {
-                return RedirectToAction("/Admin/Index/" + id);
+                return HttpNotFound();
             }
-            return View(data);
+            db.DanhGias.Remove(danhGia);
+            db.SaveChanges();
+            return RedirectToAction("Index", new { id = danhGia.IdTinTuc });
         }
 
         public ActionResult Change(int id)

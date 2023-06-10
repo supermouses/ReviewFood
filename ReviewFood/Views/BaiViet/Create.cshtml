@@ -10,6 +10,7 @@
         text-align: center;
     }
 </style>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <section class="s-content s-content--top-padding s-content--narrow">
     <h1> Tạo Bài Viết</h1>
 
@@ -45,7 +46,7 @@
                                 @Html.LabelFor(model => model.NoiDung, "Nội Dung", htmlAttributes: new { @class = "control-label col-md-2" })
 
                                 <div class="col-md-10">
-                                    @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control", @id = "editor1" })
+                                    @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control", @id = "summernote" })
                                     @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -53,6 +54,7 @@
                             <div class="form-group">
                                 <div class="col-md-10">
                                     @Html.LabelFor(model => model.DanhMuc, "Danh Mục", htmlAttributes: new { @class = "control-label col-md-2" })
+
                                     @Html.DropDownListFor(model => model.IdDanhMuc, new SelectList(ViewBag.DanhMucs, "Id", "TenDanhMuc"), "Tên Danh Mục", new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.IdDanhMuc, "", new { @class = "text-danger" })
                                 </div>
@@ -76,8 +78,6 @@
     </article>
 
 </section>
-
-
 @section Scripts
 {
     @{
@@ -93,6 +93,9 @@
         } else if (message_err != "" && message_err != null) {
             toastr.error(message_err, 'Lỗi!');
         }
+        $(document).ready(function () {
+            $('#summernote').summernote();
+        });
         CKEDITOR.replace( 'editor1' );
     </script>
 }
