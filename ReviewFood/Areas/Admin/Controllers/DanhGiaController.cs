@@ -58,5 +58,9 @@ namespace ReviewFood.Areas.Admin.Controllers
             ViewBag.Done = "Thay đổi thành công";
             return RedirectToAction("/Index/" + data.IdTinTuc);
         }
+        public ActionResult tongtkDanhGia()
+        {
+            return View(db.DanhGias.Where(tt => tt.TrangThai == true).ToList());
+        }
     }
 }

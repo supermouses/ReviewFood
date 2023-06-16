@@ -19,8 +19,9 @@ namespace ReviewFood.Areas.Admin.Controllers
             int TongTinTuc = db.BaiViets.Count();
             int TongTinChuaDuyet = db.BaiViets.Where(tt => tt.TrangThai == false).Count();
             int TaiKhoanChuaDuyet = db.TaiKhoans.Where(ttk => ttk.TrangThai == false).Count();
-            int TongTaiKhoan = db.TaiKhoans.Count();  
-            int[] data = new int[] { TongDanhMucCha, TongDanhMuc, TongTinTuc, TongTaiKhoan, TongTinChuaDuyet, TaiKhoanChuaDuyet };
+            int TongTaiKhoan = db.TaiKhoans.Count();
+            int TongDanhGias = db.DanhGias.Count();
+            int[] data = new int[] { TongDanhMucCha, TongDanhMuc, TongTinTuc, TongTaiKhoan, TongTinChuaDuyet, TaiKhoanChuaDuyet, TongDanhGias };
             ViewBag.Data = data;
             return View();
         }
